@@ -1,0 +1,25 @@
+style
+  |  h1 { max-width: 500px; margin: auto; } div { max-width: 500px; margin: auto; } 
+h1
+  = @product.name
+div
+  br
+  |  code: 
+  = @product.code
+  br
+  br
+  
+  = image_tag @product.cover_image, width: '500' if @product.cover_image.attached?
+  br
+  br
+  |  description: 
+  = @product.description
+br
+br
+  = render 'review', review: @review
+= link_to 'Back' , :back
+
+
+
+
+  

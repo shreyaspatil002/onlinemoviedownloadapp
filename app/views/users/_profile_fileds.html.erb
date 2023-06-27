@@ -1,0 +1,26 @@
+<h3>Profile fields </h3>
+  <%= f.fields_for :profile do |p| %>
+  <div>
+    <%= p.label :first_name %> 
+    <%= p.text_field :first_name %><br />
+    
+</div>
+ <div>
+    <%= p.label :last_name %> 
+    <%= p.text_field :last_name %><br />
+    
+</div>
+<div>
+    <%= p.label :mobile_number %>
+    <%= p.number_field :mobile %><br />
+</div>
+<div>
+    <%= p.label :address %>
+    <%= p.text_area :address %><br />
+</div>
+
+ <div>
+    <%= p.label :zip_code%>
+    <%= p.number_field :zip_code %><br />
+</div> 
+<% end %>

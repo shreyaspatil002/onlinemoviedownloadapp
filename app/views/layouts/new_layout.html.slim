@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title
+      | new_layout
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body[style="background: grey;"]
+    = yield

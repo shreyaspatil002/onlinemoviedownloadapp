@@ -1,0 +1,21 @@
+= form_for @product do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  div
+    = f.label :code
+    = f.text_field :code
+  .field
+    = f.label :price, step: '0.1'
+    = f.number_field :price
+  .field
+    = f.label :is_active
+    = f.check_box :is_active
+
+  .field
+    = f.label :cover_image
+    = f.file_field :cover_image
+  div
+    = f.submit "save"
+br
+= link_to 'Back' , :back
