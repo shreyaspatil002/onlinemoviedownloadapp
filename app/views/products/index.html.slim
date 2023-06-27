@@ -1,0 +1,37 @@
+body[style="background: #ffcc66;    
+            max-width: 500px;
+            margin: auto;"]
+  
+  h1
+    | Products
+  
+  
+  div
+    =  form_tag products_path, method: 'get' do
+      |  Search: 
+      = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+      = submit_tag "Search"
+      = link_to "Clear", products_path
+  br
+
+  br
+  table
+    thead
+      tr
+        th
+          |  NAME 
+        th
+          |  CODE 
+        th
+          |  ACTIONS 
+        th 
+          |  Image
+    tbody
+      - @products.each do |product|
+        tr
+          = render partial: 'product', locals: {product: product}
+  br
+  = link_to "New" , new_product_path
+  li.page-link
+  .page-item
+    = will_paginate(@product)

@@ -1,0 +1,15 @@
+style
+  |  div { font-family: "Times New Roman"; max-width: 500px; margin: auto; } 
+div
+  tr
+    td
+      = product.name
+    td
+      = product.code
+    td
+      = link_to "Edit", edit_product_path(product)
+      = link_to "Show", product_path(product)
+      = link_to "Delete", product_path(product), method: :delete, data: {confirm: 'Are you sure?'}
+      = link_to "Download", download_pdf_product_path(product)
+    td 
+      = image_tag product.cover_image, width: '150'
