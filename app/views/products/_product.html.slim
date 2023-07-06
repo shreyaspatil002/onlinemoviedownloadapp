@@ -1,0 +1,46 @@
+  style
+    |  div { font-family: "Times New Roman"; max-width: 500px; margin: auto; } 
+  div
+  -if user_signed_in?  
+    tr
+      td
+        = product.name
+      td
+        
+        = product.code
+      td
+      
+        = image_tag product.cover_image, width: '150' 
+    
+    - if (current_user.role == "user")
+      td
+        = link_to "Show", product_path(product) , class: "btn btn-outline-primary"
+        |  &emsp; &emsp;&emsp;   
+      td 
+        = link_to "Download", download_pdf_product_path(product) , class: "btn btn-success"
+        |  &emsp; &emsp;&emsp; 
+    - else 
+      td
+        = link_to "Show", product_path(product) , class: "btn btn-outline-primary"
+        |  &emsp; &emsp;&emsp; 
+        = link_to "Edit" , edit_product_path(product) , class:"btn btn-warning"
+        |  &emsp; &emsp;&emsp;  
+      td 
+        = link_to "Download", download_pdf_product_path(product) , class: "btn btn-success"
+        |  &emsp; &emsp;&emsp; 
+      td
+        = link_to "Delete", product_path(product),method: :delete, data: {confirm: 'Are you sure?'} ,class:"btn btn-danger"
+     
+  - else
+    tr
+      td
+        = product.name
+        |  &emsp; &emsp;&emsp; 
+      td
+        
+        = product.code
+        |  &emsp; &emsp;&emsp; 
+      td
+      
+        = image_tag product.cover_image, width: '150' 
+    

@@ -1,0 +1,41 @@
+body[style="background: #ffcc66;    
+            max-width: 500px;
+            margin: auto;"]
+  
+  h1
+    | &emsp;&emsp;&emsp;&emsp; PRODUCTS
+  
+  
+  div
+    =  form_tag products_path, method: 'get' do
+      |  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Search: 
+      = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+      = submit_tag "Search"
+      = link_to "Clear", products_path
+  br
+
+  br
+  table.table-borderless
+    thead
+      tr
+        th
+        
+          |  NAME  &emsp; 
+        th 
+        
+          |  CODE  &emsp;
+        th
+        
+          |  IMAGE &emsp;
+       
+    tbody
+      - @products.each do |product|
+        tr
+          = render partial: 'product', locals: {product: product}
+  br
+-if user_signed_in?  
+  - if (current_user.role == "admin")
+    = link_to "New" , new_product_path, class: "btn btn-outline-primary btn-lg"
+    = paginate @products
+
+  = paginate @products

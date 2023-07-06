@@ -1,0 +1,16 @@
+h1
+  | Hi
+p
+  | There is new product created !
+p
+  |  Name: 
+  = @product.name
+  br
+  |  Code: 
+  = @product.code
+  br
+
+  |  To view full product details: 
+  = link_to "click here", product_url(@product)
+p
+  | have a great day !!!

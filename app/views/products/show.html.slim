@@ -1,0 +1,29 @@
+style
+  |  h1 { max-width: 500px; margin: auto; } div { max-width: 500px; margin: auto; } 
+h1
+  = @product.name
+div
+  br
+  |  code: 
+  = @product.code
+  br
+  br
+  
+  = image_tag @product.cover_image, width: '500' if @product.cover_image.attached?
+  br
+  br
+  |  description: 
+  = @product.description
+br
+br
+- if (current_user.role == "user")
+  = render 'review', review: @review
+- else 
+   = render 'reviewadmin', review: @review
+= link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+ 
+
+
+
+
+  

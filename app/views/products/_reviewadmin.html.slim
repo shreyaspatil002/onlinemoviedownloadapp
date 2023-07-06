@@ -1,0 +1,31 @@
+style 
+  |  h2 { max-width: 1250px; margin: auto; }
+  |  div { max-width: 500px; margin: auto; }
+/= current_user.role =="admin" 
+h2
+  | Reviews :
+  -@product.reviews.each do |review|
+    .card.mb-3
+      .card-body
+        p.card-text
+        
+            strong
+            h3 
+              | &nbsp;User name :  
+              = review.user_name
+    
+        p.card-text
+            strong 
+            |  &emsp;Comment : 
+            = review.comments
+        p.card-text
+            strong 
+            |  &emsp;Rating : 
+            = review.rating
+        p
+    br
+
+      div
+        = link_to "Delete", product_review_path(@product.id, review.id), method: :delete, data: {confirm: 'Are you sure?'},class:"btn btn-danger"
+      
+
