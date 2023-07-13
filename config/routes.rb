@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
   #resources :categories
+  get 'cart', to: 'cart#show'
+  get 'cart_pay', to: 'cart#pay'
+  post 'cart/add'
+  post 'cart/remove'
+  resources :cart 
   resources :products do
     resources :reviews
   end
@@ -12,6 +17,4 @@ Rails.application.routes.draw do
     end 
   end
   root to: 'products#index'
- 
-
 end
