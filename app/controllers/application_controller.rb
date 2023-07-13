@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  before_action :set_render_cart
+  before_action :initialize_cart
   include Pundit
 
     def after_sign_in_path_for(resource)
@@ -8,5 +10,20 @@ class ApplicationController < ActionController::Base
         else
           new_user_session_path
         end    
+    end
+
+    
+
+    def set_render_cart
+        @render_cart = true 
+    end
+
+    def initialize_cart
+        @cart ||= Cart.find_by(id: session[:cart_id])
+
+        if @cart.nil?
+            @cart =Cart.create
+            session[:cart_id] = @cart.id
+        end
     end
 end

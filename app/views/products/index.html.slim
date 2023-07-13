@@ -1,14 +1,17 @@
 body[style="background: #ffcc66;    
             max-width: 500px;
+            text-align:center;
             margin: auto;"]
-  
+  ul 
+        =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
+  br  
   h1
-    | &emsp;&emsp;&emsp;&emsp; PRODUCTS
+    | PRODUCTS
   
   
   div
     =  form_tag products_path, method: 'get' do
-      |  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; Search: 
+      |  Search: 
       = text_field_tag 'q', params[:q], placeholder: 'search by product name'
       = submit_tag "Search"
       = link_to "Clear", products_path
@@ -34,8 +37,10 @@ body[style="background: #ffcc66;
           = render partial: 'product', locals: {product: product}
   br
 -if user_signed_in?  
-  - if (current_user.role == "admin")
-    = link_to "New" , new_product_path, class: "btn btn-outline-primary btn-lg"
-    = paginate @products
-
+    - if (current_user.role == "admin")
+      = link_to "New" , new_product_path, class: "btn btn-outline-primary btn-lg"
+      = paginate @products
+    - else
+      = paginate @products
+-else
   = paginate @products

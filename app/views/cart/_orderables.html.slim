@@ -1,0 +1,39 @@
+= form_with(url: cart_remove_path) do |f|
+ - @cart.orderables.each do |orderable|
+  - product = orderable.product
+  |  <div id="
+  = "cart-#{product.id}"
+  | "> 
+  div[style=" display:flex; justify-content:space-between: margin: 0em 5em;"]
+    strong
+      | Name: 
+    = product.name 
+  br
+    / strong
+    /   | Price
+    / = product.price
+    .form-group.mb-3
+    = f.label :customer_name
+    = f.text_field :customer_name, class: 'form-control form-control-sm'
+    .form-group.mb-3
+    = f.label :address
+    = f.text_area :address, class: 'form-control form-control-sm'
+    .form-group.mb-3
+    = f.label :qunatity
+    = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'
+    = f.submit 
+    
+    = form_with(url: cart_remove_path) do |f|
+      = f.hidden_field :id, value: orderable.id
+
+     
+      = f.submit "remove" 
+      = link_to "refresh" , cart_path
+
+    br
+    strong
+      | Total: 
+    = orderable.total
+
+    br
+

@@ -1,0 +1,62 @@
+style
+ |  div { max-width: 400px; margin: auto; class: card style: width: 18rem ;class : card-body } 
+  h1
+  |  Cart 
+- if @cart.orderables.count > 0
+  = render "cart/orderables"
+  - @cart.orderables.each do |orderable|
+    - product = orderable.product
+    = product.name
+    |  * 
+    = orderable.quantity
+    
+    |  = 
+    = product.price
+    |  * 
+    = orderable.quantity
+    |  = 
+    = orderable.quantity*product.price
+    |  rs 
+    br
+    
+    -if orderable.quantity > 2
+     | After applying discount 5%
+     h3
+      u
+       = orderable.quantity*product.price - ((orderable.quantity*product.price)/5)
+       |  rs 
+    -else 
+     h3
+      u 
+       = orderable.quantity*product.price 
+       |  rs 
+    p
+  p
+    
+- else
+  p
+    |  Your cart is empty   
+div 
+  h1
+    | Your Cart
+  p
+    h3
+      |  Your Total is&nbsp;
+      b
+       =@cart.total
+      br
+    
+      -if @cart.total > 2000
+       | WOW!!! your cart value is more than 2000 you got 10% discount 
+       br
+       br
+       |NOW ITS ONLY &nbsp;
+       u
+        b
+         = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
+     
+  
+        
+
+  = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
+  = link_to "pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"

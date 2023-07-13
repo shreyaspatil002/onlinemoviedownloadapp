@@ -6,6 +6,10 @@ class Product < ApplicationRecord
     validates :price, numericality: true
     validates :name, uniqueness: {case_sensitive: false }
     has_many :reviews 
+    has_many :orderables
+    has_many :carts, through: :orderables
+    
+
     #pagination 
     paginates_per 2
 

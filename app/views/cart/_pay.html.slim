@@ -1,0 +1,57 @@
+    
+        div[style="background: #ffcc66;    
+            max-width: 700px;
+            text-align:center;
+            margin: auto;
+            border-width: medium;"]
+          h1 
+            | pay your bills here !!!
+          br  
+          h3  
+            | Customer Name:
+            u
+             = current_user.profile&.first_name 
+             | &nbsp;
+             = current_user.profile&.last_name
+          br
+          h5
+                - @cart.orderables.each do |orderable|
+                    - product = orderable.product
+                    = product.name
+                    |  * 
+                    = orderable.quantity
+                    
+                    |  = 
+                    = product.price
+                    |  * 
+                    = orderable.quantity
+                    |  = 
+                    = orderable.quantity*product.price
+                    |  rs 
+                    p
+                    
+                    
+          br
+          br
+          h3
+            |  Your Total is&nbsp;
+            u
+             b
+             =number_with_precision(@cart.total , precision: 2)
+            | &nbsp; .rs
+            br
+          
+            -if @cart.total > 2000
+            | WOW!!! your cart value is more than 2000 you got 10% discount 
+            br
+            br
+            |NOW ITS ONLY &nbsp;
+            u
+              b
+              = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
+            | &nbsp; .rs
+          h2         
+            | THANK YOU ...
+            h4 
+              | &emsp; visit again...
+            

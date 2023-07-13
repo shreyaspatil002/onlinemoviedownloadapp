@@ -1,0 +1,18 @@
+
+  h1
+
+  = render "cart/pay"
+  
+  = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
+  - @cart.orderables.each do |orderable|
+   - product = orderable.product
+   |  <div id="
+   = "cart-#{product.id}"
+   | "> 
+   = form_with(url: cart_remove_path) do |f|
+      = f.hidden_field :id, value: orderable.id
+      = f.submit "pay" 
+      = link_to " refresh" , cart_path
+  / = link_to "Delete",  cart_remove_path, data: {confirm: 'thank you'} ,class:"btn btn-danger"
+
+

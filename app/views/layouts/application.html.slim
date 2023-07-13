@@ -2,7 +2,7 @@ doctype html
 html
   head
     title
-      | OnlineMovie
+      | STORIO  
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -13,8 +13,8 @@ html
     script[src="https://code.jquery.com/jquery-3.6.0.min.js"]
     script[src="path/to/jquery.raty.js"]
   body
-    div[style="text-align:center;"]
-      = render 'layouts/header'
-      - flash.each do |name, msg|
-        = content_tag :div ,msg, class: name
+    div[style=" text-align:center;"]
+        = render 'layouts/header'
+        - flash.each do |name, msg|
+          = content_tag :div ,msg, class: name
     = yield

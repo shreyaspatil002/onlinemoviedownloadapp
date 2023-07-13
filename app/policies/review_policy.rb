@@ -5,7 +5,7 @@ class ReviewPolicy < ApplicationPolicy
       end
     end
       def create?
-        @user.role !="admin"
+        @user.role =="user"
       end
       def destroy?
        @user.role =="admin"

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   #assosiations 
   has_one :profile, dependent: :destroy
-  
+ 
   #nasted form
   accepts_nested_attributes_for :profile, allow_destroy: true 
   def admin?
