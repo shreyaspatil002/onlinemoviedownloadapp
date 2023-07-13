@@ -1,0 +1,5 @@
+class AddAddressToOrderable < ActiveRecord::Migration[5.2]
+  def change
+    add_column :orderables, :address, :text
+  end
+end
