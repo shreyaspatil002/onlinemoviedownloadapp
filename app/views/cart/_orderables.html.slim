@@ -14,14 +14,14 @@
     / = product.price
     .form-group.mb-3
     = f.label :customer_name
-    = f.text_field :customer_name, class: 'form-control form-control-sm'
+    = f.text_field :customer_name, value: current_user.profile&.first_name, class: 'form-control form-control-sm'
     .form-group.mb-3
     = f.label :address
-    = f.text_area :address, class: 'form-control form-control-sm'
+    = f.text_area :address,value: current_user.profile&.address, class: 'form-control form-control-sm'
     .form-group.mb-3
     = f.label :qunatity
     = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'
-    = f.submit 
+    / = f.submit 
     
     = form_with(url: cart_remove_path) do |f|
       = f.hidden_field :id, value: orderable.id
@@ -33,7 +33,8 @@
     br
     strong
       | Total: 
-    = orderable.total
+    = number_with_precision(orderable.total, precision: 2) 
+           
 
     br
 

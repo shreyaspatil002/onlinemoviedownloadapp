@@ -1,8 +1,8 @@
 
   h1
 
-  = render "cart/pay"
   
+  = render "cart/table"
   = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
   - @cart.orderables.each do |orderable|
    - product = orderable.product

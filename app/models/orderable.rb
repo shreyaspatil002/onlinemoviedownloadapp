@@ -6,7 +6,7 @@ class Orderable < ApplicationRecord
   
   def total
     if quantity > 2
-      product.price * quantity - ((product.price * quantity) /10) 
+      product.price * quantity - ((product.price * quantity) /20) 
     else
       product.price * quantity
     end 

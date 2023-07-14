@@ -23,12 +23,12 @@ style
      | After applying discount 5%
      h3
       u
-       = orderable.quantity*product.price - ((orderable.quantity*product.price)/5)
+       = number_with_precision(product.price*orderable.quantity - ((orderable.quantity*product.price)/20), precision: 2) 
        |  rs 
     -else 
      h3
       u 
-       = orderable.quantity*product.price 
+       = number_with_precision(orderable.total, precision: 2)
        |  rs 
     p
   p
@@ -36,14 +36,14 @@ style
 - else
   p
     |  Your cart is empty   
-div 
+ 
   h1
     | Your Cart
   p
     h3
       |  Your Total is&nbsp;
       b
-       =@cart.total
+       =number_with_precision(@cart.total, precision: 2) 
       br
     
       -if @cart.total > 2000
@@ -54,9 +54,6 @@ div
        u
         b
          = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
-     
+= link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
+= link_to "pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
   
-        
-
-  = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
-  = link_to "pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"
