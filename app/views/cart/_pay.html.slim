@@ -26,7 +26,7 @@
                     |  * 
                     = orderable.quantity
                     |  = 
-                    = orderable.quantity*product.price
+                    = orderable.total 
                     |  rs 
                     p
                     
@@ -48,7 +48,7 @@
             |NOW ITS ONLY &nbsp;
             u
               b
-              = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
+              = number_with_precision(@cart.discount_price, precision: 2) 
             | &nbsp; .rs
           h2         
             | THANK YOU ...

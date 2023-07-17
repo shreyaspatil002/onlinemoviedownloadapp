@@ -46,10 +46,10 @@ div[style="background: #ffcc66;
 
           td 
             h4
-             -if orderable.quantity > 2
-              = number_with_precision(orderable.quantity*product.price - ((orderable.quantity*product.price)/20), precision: 2)
-             -else
-              = number_with_precision(orderable.quantity*product.price , precision: 2)
+              =number_with_precision(orderable.total, precision: 2)
+            
+             
+              
     td 
          h3
             |  Total is&nbsp;
@@ -66,13 +66,13 @@ div[style="background: #ffcc66;
                 -if @cart.total > 2000
                     
                     br
-                    |After applying discount &nbsp;
+                    |After applying discount =&nbsp;
                     u
                         b
-                        = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
+                        = number_with_precision(@cart.discount_price, precision: 2) 
                     br
                     h5
-                        | WOW!!! your cart value is more than 2000 you got 10% discount 
+                        | WOW!!!  you got 10% discount 
                     br
     td 
     td 
