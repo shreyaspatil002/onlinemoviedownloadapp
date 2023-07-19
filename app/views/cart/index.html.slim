@@ -11,6 +11,8 @@ table.table.table-bordered.table-striped
 
         th Customer Name
 
+        th Address
+
         th Price
 
         th Quantity
@@ -19,12 +21,12 @@ table.table.table-bordered.table-striped
 
     tbody
     - @orderables.each do |orderable|
-        - product = orderable.product
+        / - product = orderable.product
         tr 
             td
                 strong
                
-                = product.name 
+                = orderable.product.name 
             td
                 strong
                 
@@ -32,7 +34,11 @@ table.table.table-bordered.table-striped
             td
                 strong
                 
-                = product.price
+                = orderable.address
+            td
+                strong
+                
+                = orderable.price
             td
                 strong
                 

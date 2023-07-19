@@ -51,32 +51,22 @@ div[style="background: #ffcc66;
              
               
     td 
-         h3
-            |  Total is&nbsp;
-            u
-            b
-            =number_with_precision(@cart.total , precision: 2)
-                | &nbsp; .rs
-            div 
-            
-            p
-            h3
-                
-                
-                -if @cart.total > 2000
-                    
-                    br
-                    |After applying discount =&nbsp;
-                    u
-                        b
-                        = number_with_precision(@cart.discount_price, precision: 2) 
-                    br
-                    h5
-                        | WOW!!!  you got 10% discount 
-                    br
     td 
     td 
     td
     td
+    tr 
+      td 
+        .total-amount-box 
+          .total-amount 
+             h3     
+              strong Total amount: 
+              span = @cart.discount_price 
+      td 
+      td 
+      td
+      td
+  
+    
                 
   

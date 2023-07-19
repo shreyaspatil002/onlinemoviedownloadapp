@@ -3,12 +3,7 @@ style
   h1
   |  Cart 
 - if @cart.orderables.count > 0
-  = render "cart/orderables"
-  - @cart.orderables.each do |orderable|
-    - product = orderable.product
- 
-  p
-    
+  = render "cart/orderables"  
 - else
   p
     |  Your cart is empty   
@@ -29,7 +24,7 @@ style
        |NOW ITS ONLY &nbsp;
        u
         b
-         = number_with_precision(@cart.total - (@cart.total / 10) , precision: 2) 
+         = number_with_precision(@cart.discount_price , precision: 2) 
 = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
 -if @cart.total > 2000
  = link_to "Apply Discount & pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
