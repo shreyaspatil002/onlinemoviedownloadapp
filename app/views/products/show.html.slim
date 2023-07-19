@@ -22,12 +22,11 @@ div
       = f.submit "Add To Cart"
       =link_to "SHOW CART", cart_path, class: "btn btn-outline-primary btn-lg"
 br
-- if (current_user.role == "user")
+- if policy(@product).destroy?
+  = render 'reviewadmin', review: @review
+  = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+- else   
   = render 'review', review: @review
-- else 
-   = render 'reviewadmin', review: @review
-= link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
- 
 
 
 

@@ -2,7 +2,12 @@ body[style="background: #ffcc66;
             max-width: 500px;
             text-align:center;
             margin: auto;"]
-  ul 
+  ul
+    -if user_signed_in? 
+      -if policy(@cart).index?
+        =link_to " Order List  ", all_cart_path, class: "btn btn-outline-primary btn-lg"
+        =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
+      -else 
         =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
   br  
   h1

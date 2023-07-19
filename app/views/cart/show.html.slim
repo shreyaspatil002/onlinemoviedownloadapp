@@ -6,26 +6,7 @@ style
   = render "cart/orderables"
   - @cart.orderables.each do |orderable|
     - product = orderable.product
-    = product.name
-    |  * 
-    = orderable.quantity
-    
-    |  = 
-    = product.price
-    |  * 
-    = orderable.quantity
-    |  = 
-    = orderable.quantity*product.price
-    |  rs 
-    br
-    
-    
-     | After applying discount 5%
-     h3
-      u
-       = number_with_precision((orderable.total), precision: 2)
-       |  rs 
-    
+ 
   p
     
 - else

@@ -10,9 +10,9 @@ class Cart < ApplicationRecord
   def discount_price
     discount = 0.1
     if orderables.to_a.sum(&:total) > 2000
-      sum=orderables.to_a.sum(&:total) - (orderables.to_a.sum(&:total) * discount)
+      orderables.to_a.sum(&:total) - (orderables.to_a.sum(&:total) * discount)
     else
-      sum=orderables.to_a.sum(&:total)
+      orderables.to_a.sum(&:total)
     end
   end
 end

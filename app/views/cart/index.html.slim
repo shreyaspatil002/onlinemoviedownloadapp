@@ -1,3 +1,47 @@
-- @carts.each do |cart|
 
-    =cart.orderable
+h1
+  | Order List
+table.table.table-bordered.table-striped
+
+    thead
+
+      tr
+
+        th Product Name
+
+        th Customer Name
+
+        th Price
+
+        th Quantity
+
+        th Total paid
+
+    tbody
+    - @orderables.each do |orderable|
+        - product = orderable.product
+        tr 
+            td
+                strong
+               
+                = product.name 
+            td
+                strong
+                
+                = orderable.customer_name
+            td
+                strong
+                
+                = product.price
+            td
+                strong
+                
+                =  orderable.quantity 
+            td
+                strong
+                 
+                = orderable.total
+        br 
+= link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+ 
+            

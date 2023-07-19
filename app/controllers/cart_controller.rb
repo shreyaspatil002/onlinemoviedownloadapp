@@ -2,7 +2,7 @@
 
 class CartController < ApplicationController
   def index
-    Cart.all
+    @orderables = Orderable.all
   end
 
   def show
@@ -20,7 +20,8 @@ class CartController < ApplicationController
       current_orderable.destroy
 
     else
-      @cart.orderables.create(product: @product, quantity: quantity, customer_name: current_user.profile&.first_name && current_user.profile&.last_name, address:current_user.profile&.address , price:Product.pluck(:price) ,final_price: @cart.discount_price)
+      @cart.orderables.create(product: @product, quantity: quantity, customer_name: current_user.profile&.first_name,
+                              address: current_user.profile&.address, price: @product.price, final_price: quantity * @product.price, discount: @cart.discount_price)
     end
   end
 

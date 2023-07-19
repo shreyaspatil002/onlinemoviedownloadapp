@@ -22,6 +22,29 @@
     = f.label :qunatity
     = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'
     / = f.submit 
+    = product.name
+    |  * 
+    = orderable.quantity
+    
+    |  = 
+    = product.price
+    |  * 
+    = orderable.quantity
+    |  = 
+    = orderable.quantity*product.price
+    |  rs 
+    br
+    -if orderable.quantity > 2
+     | After applying discount 5%
+     h3
+      u
+       = number_with_precision((orderable.total), precision: 2)
+       |  rs 
+    -else 
+      h3
+       u
+        = number_with_precision((orderable.total), precision: 2)
+        |  rs 
     
     = form_with(url: cart_remove_path) do |f|
       = f.hidden_field :id, value: orderable.id
@@ -30,10 +53,10 @@
       = f.submit "remove" 
       = link_to "refresh" , cart_path
 
-    br
-    strong
-      | Total: 
-    = number_with_precision(orderable.total, precision: 2) 
+    
+    / strong
+    /   | Total: 
+    / = number_with_precision(orderable.total, precision: 2) 
            
 
     br
