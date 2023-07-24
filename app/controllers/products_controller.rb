@@ -56,10 +56,6 @@ class ProductsController < ApplicationController
               type: 'application/txt')
   end
 
-  def self.disable_all
-    update_all(is_active: false)
-  end
-
   private
 
   def product_params
