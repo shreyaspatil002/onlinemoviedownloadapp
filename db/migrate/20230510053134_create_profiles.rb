@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProfiles < ActiveRecord::Migration[5.2]
   def change
     create_table :profiles do |t|
@@ -6,7 +8,7 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :address
       t.string :zip_code
       t.integer :mobile
-      t.references :user, foreign_key: true, index: true 
+      t.references :user, foreign_key: true, index: true
 
       t.timestamps
     end
