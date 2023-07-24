@@ -61,7 +61,8 @@ div[style="background: #ffcc66;
           .total-amount 
              h3     
               strong Total amount: 
-              span = @cart.discount_price 
+              span = number_with_precision(@cart.discount_price , precision: 2) 
+              | &nbsp; rs
       td 
       td 
       td

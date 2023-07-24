@@ -5,7 +5,7 @@
   = render "cart/orderables"
   p
     | Total: 
-    = @cart.total
+    = number_with_precision(@cart.discount_price , precision: 2)
 - else
   p
     |  Your cart is empty 
