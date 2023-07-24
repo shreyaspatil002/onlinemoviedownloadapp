@@ -10,7 +10,7 @@
         = product.code
       td
       
-        = image_tag product.cover_image, width: '150' 
+        = image_tag product.cover_image, width: '150' if product.cover_image.attached?
     
       td
         = link_to "Show", product_path(product) , class: "btn btn-outline-primary"
@@ -36,5 +36,5 @@
         |  &emsp; &emsp;&emsp; 
       td
       
-        = image_tag product.cover_image, width: '150' 
+        = image_tag product.cover_image, width: '150' if product.cover_image.attached?
     

@@ -12,4 +12,6 @@ class Orderable < ApplicationRecord
       product.price * quantity
     end
   end
+  
+  
 end
