@@ -2,7 +2,7 @@ header
   ul
     - if user_signed_in?
       ul
-        = link_to('Edit registration', edit_user_registration_path, class: "btn btn-outline-primary")
+        = link_to('Profile', edit_user_registration_path, class: "btn btn-outline-primary")
       br
       ul
         = link_to('Log Out',  destroy_user_session_path ,method: :delete, class: "btn btn-outline-primary")
@@ -15,3 +15,5 @@ header
       ul
         = link_to('Register',  new_user_registration_path, class: "btn btn-outline-primary")
       br
+
+   

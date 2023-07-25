@@ -1,5 +1,5 @@
 style
- |  div { max-width: 400px; margin: auto; class: card style: width: 18rem ;class : card-body } 
+ |  div { max-width: 600px; margin: auto; class: card style: width: 18rem ;class : card-body } 
   h1
   |  Cart 
 - if @cart.orderables.count > 0
@@ -8,13 +8,16 @@ style
   p
     |  Your cart is empty   
  
-  h1
-    | Your Cart
-  p
+h1
+    | Your Value is
+  
     h3
-      |  Your Total is&nbsp;
+      |  &nbsp;
       b
-       =number_with_precision(@cart.total, precision: 2) 
+       -if @cart.total > 2000
+         =number_with_precision(@cart.total, precision: 2) 
+       -else 
+         =number_with_precision(@cart.total, precision: 2)
       br
     
       -if @cart.total > 2000
@@ -24,8 +27,12 @@ style
        |NOW ITS ONLY &nbsp;
        u
         b
-         = number_with_precision(@cart.discount_price , precision: 2) 
+         = number_with_precision(@cart.apply_discount , precision: 2) 
 = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
+= link_to "SHOW inv", invoice_path, class: "btn btn-outline-primary btn-lg"
+     
+
+      
 -if @cart.total > 2000
  = link_to "Apply Discount & pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
 -else

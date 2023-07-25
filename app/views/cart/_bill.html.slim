@@ -5,19 +5,17 @@
   = "cart-#{product.id}"
   | "> 
   div[style=" display:flex; justify-content:space-between: margin: 0em 5em;"]
-    strong
-      | Name: 
-    = product.name 
+    
   br
-    / strong
-    /   | Price
-    / = product.price
+    strong
+      | Customer name: 
+    = current_user.profile&.first_name
+    strong
+      | Address: 
+    = current_user.profile&.address
     .form-group.mb-3
-    = f.label :customer_name
-    = f.text_field :customer_name, value: current_user.profile&.first_name, class: 'form-control form-control-sm'
-    .form-group.mb-3
-    = f.label :address
-    = f.text_area :address,value: current_user.profile&.address, class: 'form-control form-control-sm'
+    = f.label :product_name
+    = f.text_field :product_name, value: product.name, class: 'form-control form-control-sm'
     .form-group.mb-3
     = f.label :qunatity
     = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'

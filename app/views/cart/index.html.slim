@@ -19,6 +19,8 @@ table.table.table-bordered.table-striped
 
         th Total paid
 
+        
+
     tbody
     - @orderables.each do |orderable|
         / - product = orderable.product
@@ -47,6 +49,7 @@ table.table.table-bordered.table-striped
                 strong
                  
                 = number_with_precision(orderable.total, precision: 2)
+          
         br 
 = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
  

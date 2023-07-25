@@ -13,8 +13,9 @@ html
     script[src="https://code.jquery.com/jquery-3.6.0.min.js"]
     script[src="path/to/jquery.raty.js"]
   body
-    div[style=" text-align:center;"]
-        = render 'layouts/header'
+    = render 'layouts/navbar'
+    div[style="text-align:center;"]
+        
         - flash.each do |name, msg|
           = content_tag :div ,msg, class: name
     = yield

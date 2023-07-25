@@ -1,5 +1,5 @@
-body[style="background: #ffcc66;    
-            max-width: 500px;
+div[style="background: white;    
+            max-width: 600px;
             text-align:center;
             margin: auto;"]
   ul
@@ -14,12 +14,7 @@ body[style="background: #ffcc66;
     | PRODUCTS
   
   
-  div
-    =  form_tag products_path, method: 'get' do
-      |  Search: 
-      = text_field_tag 'q', params[:q], placeholder: 'search by product name'
-      = submit_tag "Search"
-      = link_to "Clear", products_path
+
   br
 
   br

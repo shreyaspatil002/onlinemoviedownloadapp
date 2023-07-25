@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
 class Orderable < ApplicationRecord
+  
+  include DiscountQtyModule
+
   belongs_to :product
   belongs_to :cart
+  has_one :orderables
 
   def total
-    @discount = 0.05
-    if quantity > 2
-      product.price * quantity - (product.price * @discount)
-    else
-      product.price * quantity
-    end
+    product.price * quantity
   end
+ 
 end
+

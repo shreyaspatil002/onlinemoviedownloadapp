@@ -26,8 +26,8 @@ h2
       = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg'
     = render 'users/profile_fileds', f: f
     div
-      = f.label :role ,style: "display: block"
-      = f.text_field :role, class: 'form-control form-control-lg'
+        = f.label :role, style: "display: block"
+        = f.select :role, options_for_select([['admin'], ['user'], ['manager']]), { include_blank: true }, class: 'form-control form-control-lg'
     br
     .actions
       = f.submit "Sign up", class:"btn btn-primary"

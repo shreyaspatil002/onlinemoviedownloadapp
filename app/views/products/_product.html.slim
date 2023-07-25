@@ -1,5 +1,3 @@
-  style
-    |  div { font-family: "Times New Roman"; max-width: 500px; margin: auto; } 
   div
   -if user_signed_in?  
     tr
@@ -10,7 +8,9 @@
         = product.code
       td
       
-        = image_tag product.cover_image, width: '150' if product.cover_image.attached?
+        - if product.cover_image.attached?
+          = link_to product_path(product) do
+            = image_tag product.cover_image, width: '150'
     
       td
         = link_to "Show", product_path(product) , class: "btn btn-outline-primary"
@@ -36,5 +36,5 @@
         |  &emsp; &emsp;&emsp; 
       td
       
-        = image_tag product.cover_image, width: '150' if product.cover_image.attached?
+        = image_tag product.cover_image, width: '150' 
     

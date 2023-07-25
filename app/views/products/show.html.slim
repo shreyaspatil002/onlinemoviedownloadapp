@@ -9,7 +9,7 @@ div
   br
   br
   
-  = image_tag @product.cover_image, width: '500' if @product.cover_image.attached?
+  = image_tag @product.cover_image, width: '400' if @product.cover_image.attached?
   br
   br
   |  description: 
@@ -21,6 +21,8 @@ div
       = f.number_field :quantity, value: 0, min: 1
       = f.submit "Add To Cart"
       =link_to "SHOW CART", cart_path, class: "btn btn-outline-primary btn-lg"
+      
+      
 br
 - if policy(@product).destroy?
   = render 'reviewadmin', review: @review

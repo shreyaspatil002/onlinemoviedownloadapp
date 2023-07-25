@@ -36,6 +36,7 @@ h2
       | (we need your current password to confirm your changes)
     br
     = f.password_field :current_password, autocomplete: "current-password", class: 'form-control form-control-lg'
+    = render 'users/profile_fileds', f: f
   .actions
     = f.submit "Update"
 h3
