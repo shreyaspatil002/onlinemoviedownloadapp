@@ -26,10 +26,10 @@ div
 br
 - if policy(@product).destroy?
   = render 'reviewadmin', review: @review
-  = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+ 
 - else   
   = render 'review', review: @review
-  = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+= link_to "Back" , root_path, class: "btn btn-light"
 
 
 

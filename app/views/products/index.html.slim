@@ -38,7 +38,7 @@ div[style="background: white;
   br
 -if user_signed_in?  
     - if (current_user.role == "admin")
-      = link_to "New" , new_product_path, class: "btn btn-outline-primary btn-lg"
+      = link_to "New" , new_product_path, class: "btn btn-light"
       = paginate @products
     - else
       = paginate @products

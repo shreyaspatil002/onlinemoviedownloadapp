@@ -28,14 +28,16 @@ h1
        u
         b
          = number_with_precision(@cart.apply_discount , precision: 2) 
-= link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
-= link_to "SHOW inv", invoice_path, class: "btn btn-outline-primary btn-lg"
-     
+= link_to "HOME" , root_path, class: "btn btn-light"
+/ -if @cart.total > 2000
+/  = link_to "Apply Discount & pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
+/ -else
+/  = link_to " pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
 
-      
--if @cart.total > 2000
- = link_to "Apply Discount & pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
--else
- = link_to " pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
-
+=form_with( url: cart_pay_path ) do |f|
+      / = f.hidden_field :id, value: @product.id
+      = f.number_field :quantity, value: 0, min: 1
+      = f.submit "Add To Cart"
+      =link_to "SHOW CART", cart_path, class: "btn btn-outline-primary btn-lg"
   
+      =f.submit 'pay'

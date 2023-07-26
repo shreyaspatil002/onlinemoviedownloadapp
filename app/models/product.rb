@@ -1,11 +1,12 @@
 # frozen_string_literal: true
- # #SCOPE
-  # scope :matching, ->(q) {where(name: q )} only name field
+
+# #SCOPE
+# scope :matching, ->(q) {where(name: q )} only name field
 
 class Product < ApplicationRecord
   # USED IN CODE
   # pagination
-  
+
   paginates_per 3
 
   validates :name, presence: true
@@ -17,11 +18,13 @@ class Product < ApplicationRecord
 
   has_many :reviews
   has_many :orderables
+  has_many :cart_items
   has_many :carts, through: :orderables
   has_many :bills
   has_one_attached :cover_image do |img|
     img.variant :thumb, resize_to_limit: [100, 100]
   end
+  
 
   scope :matching, ->(q) { where('name = :q OR code = :q', q: q) }
 
@@ -41,13 +44,13 @@ class Product < ApplicationRecord
   private
 
   def acceptable_image
-
     return false unless cover_image.attached?
+
     errors.add(:cover_image, 'is too big') unless cover_image.byte_size <= 1.megabyte
     acceptable_types = ['image/jpeg', 'image/png', 'image/webp']
     return if acceptable_types.include?(cover_image.content_type)
-    errors.add(:cover_image, 'must be a JPGE or PNG')
 
+    errors.add(:cover_image, 'must be a JPGE or PNG')
   end
 
   # def method_after_commit
@@ -59,5 +62,4 @@ class Product < ApplicationRecord
   # def method_after_find
   #     puts "\n Calling after_find callback "
   # end
-
 end

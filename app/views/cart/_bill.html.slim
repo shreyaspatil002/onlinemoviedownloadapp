@@ -1,49 +1,30 @@
-= form_with(url: cart_remove_path) do |f|
+= form_with(url: cart_pay_path) do |f|
  - @cart.orderables.each do |orderable|
   - product = orderable.product
   |  <div id="
   = "cart-#{product.id}"
   | "> 
   div[style=" display:flex; justify-content:space-between: margin: 0em 5em;"]
-    
-  br
-    strong
-      | Customer name: 
-    = current_user.profile&.first_name
-    strong
-      | Address: 
-    = current_user.profile&.address
-    .form-group.mb-3
+    = f.label :Orderable_id
+    = f.number_field :Orderable_id, value: orderable.id ,readonly: true,class: 'form-control form-control-sm'
+    = f.label :product_id
+    = f.number_field :product_id, value: orderable.product_id ,readonly: true,class: 'form-control form-control-sm'
+    = f.label :cart_id
+    = f.number_field :cart_id, value: orderable.cart_id ,readonly: true,class: 'form-control form-control-sm'
+    = f.label :customer_name
+    = f.text_field :customer_name, value: orderable.customer_name, class: 'form-control form-control-sm'
     = f.label :product_name
     = f.text_field :product_name, value: product.name, class: 'form-control form-control-sm'
-    .form-group.mb-3
+    = f.label :total_product_price
+    = f.number_field :total_product_price, value: orderable.price ,readonly: true,class: 'form-control form-control-sm'
     = f.label :qunatity
-    = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'
+    = f.number_field :quantity, value: orderable.quantity ,readonly: true,class: 'form-control form-control-sm'    
+    = f.label :address
+    = f.text_field :address, value: orderable.address ,readonly: true,class: 'form-control form-control-sm'    
+    = f.label :cart_price
+    = f.number_field :cart_price, value: orderable.price ,readonly: true,class: 'form-control form-control-sm'
     / = f.submit 
-    = product.name
-    |  * 
-    = orderable.quantity
-    
-    |  = 
-    = product.price
-    |  * 
-    = orderable.quantity
-    |  = 
-    = orderable.total
-    |  rs 
-    br
-    -if orderable.quantity > 2 && @cart.apply_discount > orderable.qty_discount
-      | After applying discount 5%
-      h3
-        u
-        = number_with_precision((orderable.qty_discount), precision: 2)
-        |  rs 
-   
-    
-    = form_with(url: cart_remove_path) do |f|
-      = f.hidden_field :id, value: orderable.id
-      = f.submit "remove" 
-      = link_to "refresh" , cart_path
+  
      
     br
 

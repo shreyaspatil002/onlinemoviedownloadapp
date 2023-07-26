@@ -27,7 +27,7 @@ h2
     = render 'users/profile_fileds', f: f
     div
         = f.label :role, style: "display: block"
-        = f.select :role, options_for_select([['admin'], ['user'], ['manager']]), { include_blank: true }, class: 'form-control form-control-lg'
+        = f.select :role, options_for_select([['admin'], ['user'], ['manager']]), class: 'form-control form-control-lg'
     br
     .actions
       = f.submit "Sign up", class:"btn btn-primary"
