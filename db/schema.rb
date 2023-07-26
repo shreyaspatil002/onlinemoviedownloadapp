@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_20_100458) do
+ActiveRecord::Schema.define(version: 2023_07_26_104052) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -34,19 +34,45 @@ ActiveRecord::Schema.define(version: 2023_07_20_100458) do
   end
 
   create_table "bills", force: :cascade do |t|
+    t.integer "Orderable_id"
     t.integer "product_id"
-    t.integer "user_id"
-    t.integer "profile_id"
+    t.integer "cart_id"
+    t.string "customer_name"
+    t.decimal "product_price"
+    t.integer "quantity"
+    t.decimal "total_product_price"
+    t.text "address"
+    t.decimal "cart_price"
+    t.date "ordered_date"
+    t.date "dilvery_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "product_name"
+    t.integer "user_id"
+    t.index ["Orderable_id"], name: "index_bills_on_Orderable_id"
+    t.index ["cart_id"], name: "index_bills_on_cart_id"
     t.index ["product_id"], name: "index_bills_on_product_id"
-    t.index ["profile_id"], name: "index_bills_on_profile_id"
-    t.index ["user_id"], name: "index_bills_on_user_id"
+  end
+
+  create_table "cart_items", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "cart_id"
+    t.integer "quantity"
+    t.string "customer_name"
+    t.decimal "final_price"
+    t.decimal "price"
+    t.text "address"
+    t.decimal "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "status"
+    t.decimal "price"
+    t.integer "user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -57,6 +83,9 @@ ActiveRecord::Schema.define(version: 2023_07_20_100458) do
   end
 
   create_table "discounts", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.integer "discount_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
