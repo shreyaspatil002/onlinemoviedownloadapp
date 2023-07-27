@@ -1,0 +1,82 @@
+
+
+div[style="background: #ffcc66;    
+           background: grey;
+            text-align:center;
+            margin: auto;
+            border-width: medium;"]
+  
+  h3 
+    |Name: &nbsp;
+    =  current_user.profile&.first_name
+  br
+  h3 
+    |Dilevary Address:&nbsp;
+    =  current_user.profile&.address
+  table.table.table-bordered.table-striped
+
+    thead
+
+      tr
+
+        th Name
+
+        th Quantity
+
+        th Actual Price
+
+        th Total
+
+        th Discount Price
+        th Status
+    tbody
+
+    - @cart.orderables.each do |orderable|
+        - product = orderable.product        
+        tr
+         
+          td 
+            h4
+             = product.name
+
+          td
+            h4
+             = orderable.quantity
+
+          td
+            h4
+             = product.price
+
+          td 
+            h4
+             = orderable.quantity*product.price
+
+          td 
+            h4
+              =number_with_precision(orderable.total, precision: 2)
+          td 
+              = orderable.status
+            
+             
+              
+    td 
+    td 
+    td 
+    td
+    td
+    tr 
+      td 
+        .total-amount-box 
+          .total-amount 
+             h3     
+              strong Total amount: 
+              span = number_with_precision(@cart.apply_discount , precision: 2) 
+              | &nbsp; rs
+      td 
+      td 
+      td
+      td
+
+    
+                
+  

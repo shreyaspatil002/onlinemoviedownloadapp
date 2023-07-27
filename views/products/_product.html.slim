@@ -1,0 +1,40 @@
+  div
+  -if user_signed_in?  
+    tr
+      td
+        = product.name
+      td
+        
+        = product.code
+      td
+      
+        - if product.cover_image.attached?
+          = link_to product_path(product) do
+            = image_tag product.cover_image, width: '150'
+    
+      td
+        = link_to "Show", product_path(product) , class: "btn btn-light"
+      td  
+        - if policy(product).update?
+          = link_to "Edit" , edit_product_path(product) , class:"btn btn-light"
+         
+      td 
+        = link_to "Download", download_pdf_product_path(product) , class: "btn btn-light"
+         
+      td
+        - if policy(product).destroy?
+          = link_to "Delete", product_path(product),method: :delete, data: {confirm: 'Are you sure?'} ,class:"btn btn-danger"
+     
+  - else
+    tr
+      td
+        = product.name
+        |  &emsp; &emsp;&emsp; 
+      td
+        
+        = product.code
+        |  &emsp; &emsp;&emsp; 
+      td
+      
+        = image_tag product.cover_image, width: '150' 
+    

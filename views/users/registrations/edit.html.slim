@@ -1,0 +1,48 @@
+style
+  |  h2 { max-width: 500px; margin: auto; } div { max-width: 500px; margin: auto; } 
+  |  h3 { max-width: 500px; margin: auto; } div { max-width: 500px; margin: auto; } 
+
+h2
+  | Edit 
+  = resource_name.to_s.humanize
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+  = render "users/shared/error_messages", resource: resource
+  .field-group.mb-3
+    = f.label :email, style: "display: block"
+    br
+    = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control form-control-lg'
+  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+    div
+      | Currently waiting confirmation for: 
+      = resource.unconfirmed_email 
+  .field-group.mb-3
+    = f.label :password, style: "display: block"
+    i
+      | (leave blank if you don't want to change it)
+    br
+    = f.password_field :password, autocomplete: "new-password", class: 'form-control form-control-lg'
+    - if @minimum_password_length
+      br
+      em
+        = @minimum_password_length
+        |  characters minimum
+  .field-group.mb-3
+    = f.label :password_confirmation, style: "display: block"
+    br
+    = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control form-control-lg'
+  .field-group.mb-3
+    = f.label :current_password, style: "display: block"
+    i
+      | (we need your current password to confirm your changes)
+    br
+    = f.password_field :current_password, autocomplete: "current-password", class: 'form-control form-control-lg'
+    = render 'users/profile_fileds', f: f
+  .actions
+    = f.submit "Update"
+h3
+  | Cancel my account
+div
+  | Unhappy? 
+  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete
+  br
+  = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"

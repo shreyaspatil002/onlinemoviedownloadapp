@@ -1,0 +1,44 @@
+h1 Your Cart
+
+- if @cart_items.present?
+
+  table.table.table-bordered.table-striped
+
+    thead
+
+      tr
+
+        th Name
+
+        th Quantity
+
+        th Price
+
+        th Total
+
+    tbody
+
+      - @cart_items.each do |cart_item|
+
+        tr
+
+          td = cart_item.product.name
+
+          td = cart_item.quantity
+
+          td = cart_item.product.price
+
+          td = cart_item.product.price * cart_item.quantity
+
+  .total-amount-box
+
+    .total-amount
+
+      strong Total Amount:
+
+      span = @total_amount
+
+    button type="submit" class="btn btn-primary" Apply Coupon
+  / Form to pay the bill
+  = form_with(url: pay_bill_cart_path(@cart), method: :post) do |form|
+    = form.submit 'Pay Bill', class: 'btn btn-primary'

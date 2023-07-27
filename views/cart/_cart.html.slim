@@ -1,0 +1,12 @@
+
+ h1
+  |  Cart 
+- if @cart.orderables.count > 0
+  = render "cart/orderables"
+  p
+    | Total: 
+    = number_with_precision(@cart.discount_price , precision: 2)
+- else
+  p
+    |  Your cart is empty 
+   

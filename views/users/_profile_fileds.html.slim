@@ -1,0 +1,23 @@
+h3
+  | Profile fields 
+= f.fields_for :profile do |p|
+  div
+    = p.label :first_name ,style: "display: block"
+    = p.text_field :first_name, class: 'form-control form-control-lg'
+    br
+  div
+    = p.label :last_name ,style: "display: block"
+    = p.text_field :last_name, class: 'form-control form-control-lg'
+    br
+  div
+    = p.label :mobile_number ,style: "display: block"
+    = p.number_field :mobile, class: 'form-control form-control-lg'
+    br
+  div
+    = p.label :address ,style: "display: block"
+    = p.text_area :address, class: 'form-control form-control-lg'
+    br
+  div
+    = p.label :zip_code ,style: "display: block"
+    = p.number_field :zip_code, class: 'form-control form-control-lg'
+    br

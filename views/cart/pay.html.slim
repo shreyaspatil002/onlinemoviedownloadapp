@@ -1,0 +1,17 @@
+
+  h1
+    | Invoice
+    
+  = render "cart/table"
+  br
+  -if  @cart.total > 2000
+    h3 
+      |  &emsp;You got 10 % discount !!!! 
+    h5 
+      |  &emsp; &emsp;Thank you visit again...  
+  -else
+    h5 
+      |  &emsp; &emsp;Thank you visit again...
+  br
+  = link_to "HOME" , root_path, class: "btn btn-outline-primary btn-lg"
+

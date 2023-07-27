@@ -1,0 +1,60 @@
+
+h1
+  | Order List
+table.table.table-bordered.table-striped
+
+    thead
+
+      tr
+
+        th Product Name
+
+        th Customer Name
+
+        th Address
+
+        th Price
+
+        th Quantity
+
+        th Total payable
+        th status
+
+        
+
+    tbody
+    - @orderables.each do |orderable|
+        / - product = orderable.product
+        tr 
+            td
+                strong
+               
+                = orderable.product.name 
+            td
+                strong
+                
+                = orderable.customer_name
+            td
+                strong
+                
+                = orderable.address
+            td
+                strong
+                
+                = orderable.price
+            td
+                strong
+                
+                =  orderable.quantity 
+            td
+                strong
+                 
+                = number_with_precision(@cart.total, precision: 2)
+            td 
+                strong 
+                = orderable.status
+          
+        br 
+= link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+ 
+            

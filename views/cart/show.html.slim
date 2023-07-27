@@ -1,0 +1,42 @@
+style
+ |  div { max-width: 600px; margin: auto; class: card style: width: 18rem ;class : card-body } 
+  h1
+  |  Cart 
+- if @cart.orderables.count > 0
+  = render "cart/orderables"  
+- else
+  p
+    |  Your cart is empty   
+ 
+h1
+    | Your Value is
+  
+    h3
+      |  &nbsp;
+      b
+       -if @cart.total > 2000
+         =number_with_precision(@cart.total, precision: 2) 
+       -else 
+         =number_with_precision(@cart.total, precision: 2)
+      br
+    
+      -if @cart.total > 2000
+       | WOW!!! your cart value is more than 2000 you got 10% discount 
+       br
+       br
+       |NOW ITS ONLY &nbsp;
+       u
+        b
+         = number_with_precision(@cart.apply_discount , precision: 2) 
+= link_to "HOME" , root_path, class: "btn btn-light"
+-if @cart.total > 2000
+ = link_to "Apply Discount & pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
+-else
+ = link_to " pay" ,  cart_pay_path, class: "btn btn-outline-primary btn-lg"     
+
+/ =form_with( url: cart_pay_path ) do |f|
+/       / = f.hidden_field :id, value: @product.id
+/       = f.submit "Add To Cart"
+/       =link_to "SHOW CART", cart_path, class: "btn btn-outline-primary btn-lg"
+  
+/       =f.submit 'pay'
