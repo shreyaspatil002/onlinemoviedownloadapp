@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_26_104052) do
+ActiveRecord::Schema.define(version: 2023_07_28_071735) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,19 +54,6 @@ ActiveRecord::Schema.define(version: 2023_07_26_104052) do
     t.index ["product_id"], name: "index_bills_on_product_id"
   end
 
-  create_table "cart_items", force: :cascade do |t|
-    t.integer "product_id"
-    t.integer "cart_id"
-    t.integer "quantity"
-    t.string "customer_name"
-    t.decimal "final_price"
-    t.decimal "price"
-    t.text "address"
-    t.decimal "discount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -101,6 +88,7 @@ ActiveRecord::Schema.define(version: 2023_07_26_104052) do
     t.decimal "price"
     t.text "address"
     t.decimal "discount"
+    t.string "status"
     t.index ["cart_id"], name: "index_orderables_on_cart_id"
     t.index ["product_id"], name: "index_orderables_on_product_id"
   end
