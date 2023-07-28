@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # app/models/discount_module.rb
 module DiscountPriceModule
   def apply_discount

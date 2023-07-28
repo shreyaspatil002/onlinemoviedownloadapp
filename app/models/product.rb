@@ -19,7 +19,6 @@ class Product < ApplicationRecord
   has_many :reviews
   has_many :orderables
   has_many :cart_items
-  has_many :carts, through: :orderables
   has_many :bills
   has_one_attached :cover_image do |img|
     img.variant :thumb, resize_to_limit: [100, 100]

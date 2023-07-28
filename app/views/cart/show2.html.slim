@@ -1,0 +1,91 @@
+h1 Your Cart
+
+ 
+
+- if @cart_items.present?
+
+  table.table.table-bordered.table-striped
+
+    thead
+
+      tr
+
+        th Name
+
+        th Quantity
+
+        th Price
+
+        th Total
+
+        th status
+
+    tbody
+
+      - @cart_items.each do |cart_item|
+
+        tr
+
+          td = cart_item.product.name
+
+          td = cart_item.quantity
+
+          td = cart_item.product.price
+
+          td = cart_item.product.price * cart_item.quantity
+
+          td = @cart.status
+
+  .total-amount-box
+
+    .total-amount
+
+      strong Total Amount:
+
+      span = @total_amount
+
+ 
+
+  / Form to apply discount coupon
+
+  = form_tag apply_discount_cart_path(@cart), method: :post do
+
+    label for: :discount_code, class: 'form-label' do
+
+      | Select a Discount Coupon:
+
+    select name: 'discount_code', id: 'discount_code', class: 'form-select'
+
+      option value=""
+
+        | An empty option for no discount selected
+
+      - @discount_coupons.each do |coupon|
+
+        option value=coupon.code
+
+          = coupon.name
+
+      option value="summer30"
+
+        | Summer 30% (summer30)
+
+      option value="winter20"
+
+        | Winter 20% (winter20)
+
+    button type="submit" class="btn btn-primary" Apply Coupon
+
+ 
+
+  / Form to pay the bill
+
+  = form_with(url: pay_bill_cart_path(@cart), method: :post) do |form|
+
+    = form.submit 'Pay Bill', class: 'btn btn-primary'
+
+ 
+
+- else
+
+  p Your cart is empty.

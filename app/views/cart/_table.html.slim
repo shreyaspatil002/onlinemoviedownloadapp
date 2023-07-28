@@ -5,6 +5,7 @@ div[style="background: #ffcc66;
             text-align:center;
             margin: auto;
             border-width: medium;"]
+  
   h3 
     |Name: &nbsp;
     =  current_user.profile&.first_name
@@ -27,7 +28,7 @@ div[style="background: #ffcc66;
         th Total
 
         th Discount Price
-
+        th Status
     tbody
 
     - @cart.orderables.each do |orderable|
@@ -53,6 +54,8 @@ div[style="background: #ffcc66;
           td 
             h4
               =number_with_precision(orderable.total, precision: 2)
+          td 
+              = orderable.status
             
              
               

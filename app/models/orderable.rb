@@ -2,6 +2,7 @@
 
 class Orderable < ApplicationRecord
   include DiscountQtyModule
+  include DiscountPriceModule
 
   belongs_to :product
   belongs_to :cart
@@ -10,4 +11,5 @@ class Orderable < ApplicationRecord
   def total
     product.price * quantity
   end
+ 
 end

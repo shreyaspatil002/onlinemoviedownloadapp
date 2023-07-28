@@ -7,17 +7,17 @@ table.table.table-bordered.table-striped
 
       tr
 
+        th Product Name
+
         th Customer Name
 
         th Address
-
-        th Product Name
 
         th Price
 
         th Quantity
 
-        th Total paid
+        th Total payable
         th status
         th Cart id
 
@@ -29,17 +29,16 @@ table.table.table-bordered.table-striped
         tr 
             td
                 strong
+               
+                = orderable.product.name 
+            td
+                strong
                 
                 = orderable.customer_name
             td
                 strong
                 
                 = orderable.address
-            td
-                strong
-               
-                = orderable.product.name 
-          
             td
                 strong
                 

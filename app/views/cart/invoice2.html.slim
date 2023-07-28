@@ -1,0 +1,65 @@
+h1 Invoice
+
+ 
+
+- if @user.profile.present?
+
+  p Customer Name: #{@user.profile.name}
+
+  p Billing Address: #{@user.profile.address}
+
+  / p status: #{@status.status}
+
+- else
+
+  p Customer Name: N/A
+
+ 
+
+table.table.table-bordered.table-striped
+
+  thead
+
+    tr
+
+      th Product Name
+
+      th Quantity
+
+      th Price
+
+      th Total
+
+      th status
+
+  tbody
+
+    - @order_items.each do |order_item|
+
+      tr
+
+        td= order_item.product.name
+
+        td= order_item.quantity
+
+        td= order_item.price
+
+        td= order_item.price * order_item.quantity
+
+        td= order_item.invoice_status
+
+        / td= order_item.invoice_date
+
+p Discount Applied: #{@dist = (@order.total_amount * 0.1)}
+
+ 
+
+table.table.table-bordered.table-striped
+
+  tbody
+
+    tr
+
+      td[colspan="3"] Total Amount:
+
+      td= @order.total_amount - @dist
