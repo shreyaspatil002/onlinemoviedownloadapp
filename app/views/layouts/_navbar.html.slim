@@ -2,7 +2,18 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
   .container-fluid
     a.navbar-brand[href="/products"]
       | Home
-    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+    - if user_signed_in?
+     -if policy(@cart).index?
+      a.navbar-brand[href="/all_cart"]
+        | Order History
+      a.navbar-brand[href="/cart"]
+        | Show Cart
+     -else
+      a.navbar-brand[href="/all_cart"]
+       | Order History
+      a.navbar-brand[href="/cart"]
+        | Show Cart
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  style="color: white;;"]
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
@@ -28,5 +39,5 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
             |  Search: 
             = text_field_tag 'q', params[:q], placeholder: 'search by product name'
             = submit_tag "Search" 
-            = link_to "Clear", products_path
+            = link_to "Clear"
           

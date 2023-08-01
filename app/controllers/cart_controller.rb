@@ -4,6 +4,9 @@ class CartController < ApplicationController
 
   def index
     @orderables = Orderable.all
+    if [current_user.profile&.first_name].present?
+      @order_histories = Orderable.where("customer_name LIKE ?", "%#{current_user.profile&.first_name}%")
+    end
   end
 
   def show
@@ -31,13 +34,13 @@ class CartController < ApplicationController
   end
  
   def pay
+    
     @cart.orderables.update(discount: @cart.apply_discount)
     @cart.orderables.update(status: 'paid')
+    @cart.orderables.update(updated_at: @cart.updated_at + 5.days)
     
   end
-  def invoice
 
-  end
 end
 
 

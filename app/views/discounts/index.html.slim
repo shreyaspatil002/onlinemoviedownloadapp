@@ -9,6 +9,7 @@ table.table.table-bordered.table-striped
       th Code
 
       th Discount Percentage
+      th Discount limit
 
       th Action
 
@@ -19,6 +20,7 @@ table.table.table-bordered.table-striped
         td = discount.name
         td = discount.code
         td = discount.discount_percentage
+        td = discount.limit
         td
           - if policy(discount).update?
             = link_to 'Edit', edit_discount_path(discount), class: 'btn btn-primary'

@@ -1,14 +1,14 @@
 div[style="background: white;    
-            max-width: 600px;
+            max-width: 650px;
             text-align:center;
             margin: auto;"]
   ul
-    -if user_signed_in? 
-      -if policy(@cart).index?
-        =link_to " Order List  ", all_cart_path, class: "btn btn-outline-primary btn-lg"
-        =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
-      -else 
-        =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
+    / -if user_signed_in? 
+    /   -if policy(@cart).index?
+    /     =link_to " Order List  ", all_cart_path, class: "btn btn-outline-primary btn-lg"
+    /     =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
+    /   -else 
+    /     =link_to " SHOW CART  ", cart_path, class: "btn btn-outline-primary btn-lg"
   br  
   h1
     | PRODUCTS
@@ -27,6 +27,8 @@ div[style="background: white;
         th 
         
           |  CODE  &emsp;
+        th 
+          |
         th
         
           |  IMAGE &emsp;

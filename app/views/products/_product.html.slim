@@ -7,7 +7,7 @@
         
         = product.code
       td
-      
+      td
         - if product.cover_image.attached?
           = link_to product_path(product) do
             = image_tag product.cover_image, width: '150'

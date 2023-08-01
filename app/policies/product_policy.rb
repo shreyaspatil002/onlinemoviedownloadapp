@@ -1,21 +1,21 @@
 # frozen_string_literal: true
 
 class ProductPolicy < ApplicationPolicy
-  class Scope < Scope
-    def resolve
-      scope.all
-    end
-  end
+  # class Scope < Scope
+  #   def resolve
+  #     scope.all
+  #   end
+  # end
 
-  def create?
-    @user.role == 'admin'
+  def new?
+    @user.present? && @user.admin?
   end
 
   def update?
-    @user.role == 'admin'
+    @user.present? && @user.admin?
   end
 
   def destroy?
-    @user.role == 'admin'
+    @user.present? && @user.admin?
   end
 end
