@@ -31,6 +31,7 @@ class Product < ApplicationRecord
     is_active == true
   end
 
+
   # CUSTOM CALLBACKS
   # after_initialize do
   #   puts "\n Calling after_initialize callback "

@@ -34,12 +34,12 @@
     = orderable.total
     |  rs 
     br
-    -if orderable.quantity > 2 && @cart.apply_discount > orderable.qty_discount
-      | After applying discount 5%
-      h3
-        u
-        = number_with_precision((orderable.qty_discount), precision: 2)
-        |  rs 
+    / -if orderable.quantity > 2 && @cart.apply_discount > orderable.qty_discount
+    /   | After applying discount 5%
+    /   h3
+    /     u
+    /     = number_with_precision((orderable.qty_discount), precision: 2)
+    /     |  rs 
    
     
     = form_with(url: cart_remove_path) do |f|

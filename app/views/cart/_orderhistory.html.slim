@@ -1,17 +1,13 @@
--if (current_user.role != "manager")
-    =render 'orderhistory'
--else
- h1
-  | Order List
 
- table.table.table-bordered.table-striped
+h1
+  | Order History
+table.table.table-bordered.table-striped
 
     thead
 
       tr
 
         th Product Name
-        th Customer Name
         th Order date
         th Dilevry date
         th Address
@@ -24,7 +20,7 @@
         
 
     tbody
-    - @orderables.each do |orderable|
+    - @order_histories.each do |orderable|
         / - product = orderable.product
         tr 
             td
@@ -33,16 +29,12 @@
                 = orderable.product.name 
             td
                 strong
-               
-                = orderable.customer_name
-            td
-                strong
                 
                 = orderable.created_at.strftime("%Y-%m-%d")
             td
                 strong
                 
-                = (orderable.updated_at + 5.days).strftime("%Y-%m-%d")
+                = (orderable.updated_at).strftime("%Y-%m-%d")
 
             td
                 strong
@@ -71,7 +63,7 @@
             
           
         br 
- 
- = link_to "Back" , root_path, class: "btn btn-outline-primary btn-lg"
+
+
  
             
