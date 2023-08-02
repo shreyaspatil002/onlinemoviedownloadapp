@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   # USED IN CODE
   # pagination
 
-  paginates_per 3
+  paginates_per 4
 
   validates :name, presence: true
   validates :is_active, acceptance: { message: 'must be true' } # for custom messages
@@ -16,12 +16,12 @@ class Product < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validate :acceptable_image
 
-  has_many :reviews
-  has_many :orderables
-  has_many :cart_items
-  has_many :bills
+  has_many :reviews , dependent: :destroy
+  has_many :orderables , dependent: :destroy
+
+  
   has_one_attached :cover_image do |img|
-    img.variant :thumb, resize_to_limit: [100, 100]
+    img.variant :thumb, resize_to_limit: [500, 500]
   end
   
 

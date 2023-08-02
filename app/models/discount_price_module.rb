@@ -3,7 +3,6 @@ module DiscountPriceModule
   def apply_discount
     discount_threshold = 2000
     discount_by_qty= 2
-    # discount_percentage = 0.10
     total_price = orderables.to_a.sum(&:total)
 
     @discount_percentage_of_price=Discount.find_by(code: 'p10')
