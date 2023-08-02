@@ -1,6 +1,6 @@
 div[style="background: white;    
-            max-width: 650px;
-            text-align:center;
+            
+            / text-align:center;
             margin: auto;"]
   ul
     / -if user_signed_in? 
@@ -12,31 +12,13 @@ div[style="background: white;
   br  
   h1
     | PRODUCTS
-  
-  
 
   br
 
   br
-  table.table-borderless
-    thead
-      tr
-        th
-        
-          |  NAME  &emsp; 
-        th 
-        
-          |  CODE  &emsp;
-        th 
-          |
-        th
-        
-          |  IMAGE &emsp;
-       
-    tbody
-      - @products.each do |product|
-        tr
-          = render partial: 'product', locals: {product: product}
+  
+      
+          = render partial: 'product'
   br
 -if user_signed_in?  
     - if (current_user.role == "admin")

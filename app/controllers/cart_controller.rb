@@ -3,9 +3,9 @@
 class CartController < ApplicationController
 
   def index
-    @orderables = Orderable.all
+    @orderables = Orderable.order(created_at: :desc)
     if [current_user.profile&.first_name].present?
-      @order_histories = Orderable.where("customer_name LIKE ?", "%#{current_user.profile&.first_name}%")
+      @order_histories = Orderable.where("customer_name LIKE ?", "%#{current_user.profile&.first_name}%").order(created_at: :desc)
     end
   end
 

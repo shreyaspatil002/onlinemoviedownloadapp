@@ -21,7 +21,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    authorize @product
+    # authorize @product
     if @product.save
       ProductMailer.notify_product_creation(@product.id).deliver_now
       redirect_to products_path, notice: 'product created !!!'

@@ -33,11 +33,34 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
             | log in
         
        
-      form.d-flex[role="search"]
-         div
-            =  form_tag products_path, method: 'get' do
-            |  Search: 
-            = text_field_tag 'q', params[:q], placeholder: 'search by product name'
-            = submit_tag "Search" 
-            = link_to "Clear"
+      / form.d-flex[role="search"]
+      /    div
+      /       =  form_tag products_path, method: 'get' do
+      /       |  Search: 
+      /       = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+      /       = submit_tag "Search" 
+      /       = link_to "Clear"
+      form.d-flex[role="search"] 
+        div
+          = form_tag products_path, method: 'get', id: 'search-form' do
+          |  Search: 
+          = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+          = submit_tag "Search" 
+          = link_to "Clear", id: "clear-search"
+
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchForm = document.getElementById("search-form");
+    const clearSearchLink = document.getElementById("clear-search");
+    const searchInput = searchForm.querySelector("[name='q']");
+
+    clearSearchLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      searchInput.value = ""; // Clear the search input
+      searchForm.submit(); // Submit the form
+      searchInput.value = "";
+    });
+  });
+
           

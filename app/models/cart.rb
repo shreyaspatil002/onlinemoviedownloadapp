@@ -2,7 +2,6 @@
 
 class Cart < ApplicationRecord
   include DiscountPriceModule
-  include DiscountQtyModule
   
   has_many :orderables
   has_many :products, through: :orderables
