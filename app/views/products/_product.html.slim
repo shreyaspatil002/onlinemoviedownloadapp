@@ -1,40 +1,129 @@
-  div
-  -if user_signed_in?  
-    tr
-      td
-        = product.name
-      td
+.row
+
+  - @products.each do |product|
+
+    .col-md-3.mb-4
+
+      .card.shadow
+
+        .card-body
+
+          - if product.cover_image.attached?
+
+            = link_to product_path(product) do
+
+                  / = image_tag product.cover_image.variant(resize: "150x150"), class: "img-thumbnail mx-auto d-block"
+            - if product.cover_image.attached?
+                    = link_to product_path(product) do
+                      = image_tag product.cover_image, width: '100',class: "img-thumbnail mx-auto d-block"
+          h5.card-title.card-text.text-truncate.text-center.mt-2.mb-1  = product.name
+
+          p.card-text.text-truncate.text-center.mt-2.mb-1 Size: #{product.code}
+
+          p.card-text.text-muted.text-center.mb-3 Price: #{product.price}
+
+          .d-grid.gap-2
+
+          
+            = form_with(url: cart_add_path) do |f|
+              = f.hidden_field :id, value: product.id
+              = f.number_field :quantity, value: 0, min: 1
+              = f.submit "Add To Cart"
+              =link_to "SHOW CART", cart_path, class: "btn btn-light btn-sm"
+
+            = link_to 'Show', product, class: "btn btn-dark"
+
+            - if policy(product).edit?
+
+              = link_to 'Edit', edit_product_path(product), class: "btn btn-info"
+
+            - if policy(product).destroy?
+
+              = link_to "Destroy", product_path(product), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger"
+
+       
+
+p
+
+
+
+ 
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/ table.table-borderless
+/     thead
+/       tr
+/         th
         
-        = product.code
-      td
-      td
-        - if product.cover_image.attached?
-          = link_to product_path(product) do
-            = image_tag product.cover_image, width: '150'
-    
-      td
-        = link_to "Show", product_path(product) , class: "btn btn-light"
-      td  
-        - if policy(product).update?
-          = link_to "Edit" , edit_product_path(product) , class:"btn btn-light"
-         
-      td 
-        = link_to "Download", download_pdf_product_path(product) , class: "btn btn-light"
-         
-      td
-        - if policy(product).destroy?
-          = link_to "Delete", product_path(product),method: :delete, data: {confirm: 'Are you sure?'} ,class:"btn btn-danger"
-     
-  - else
-    tr
-      td
-        = product.name
-        |  &emsp; &emsp;&emsp; 
-      td
+/           |  NAME  &emsp; 
         
-        = product.code
-        |  &emsp; &emsp;&emsp; 
-      td
-      
-        = image_tag product.cover_image, width: '150' 
-    
+        
+       
+/     tbody
+/     .div
+/       - if user_signed_in?
+/         - @products.each_slice(2) do |product_group|
+/           .row
+/             - product_group.each do |product|
+/               .col-md-6
+/                 table
+/                   tr
+/                     td
+/                       - if product.cover_image.attached?
+/                         = link_to product_path(product) do
+/                           = image_tag product.cover_image, width: '100'  
+/                         br
+/                         = link_to "Show", product_path(product), class: "btn btn-light"
+                      
+/                         - if policy(product).update?
+/                           = link_to "Edit", edit_product_path(product), class: "btn btn-light"
+                      
+/                         = link_to "Download", download_pdf_product_path(product), class: "btn btn-light"
+                      
+/                         - if policy(product).destroy?
+/                           = link_to "Delete", product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+/                         br
+/                         br
+/                           = form_with(url: cart_add_path) do |f|
+/                             = f.hidden_field :id, value: product.id
+/                             = f.number_field :quantity, value: 0, min: 1
+/                             = f.submit "Add To Cart"
+/                             =link_to "SHOW CART", cart_path, class: "btn btn-light btn-sm"
+
+/                     / = product.name
+/                     / = product.code
+                  
+/       - else
+/         - @products.each_slice(2) do |product_group|
+/           .row
+/             - product_group.each do |product|
+/               .col-md-6
+/                 table
+/                   tr
+/                     td= product.name
+/                     | &emsp; &emsp;
+/                     td= product.code
+/                     | &emsp; &emsp;
+/                     td
+/                       = image_tag product.cover_image, width: '150'
+
