@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_28_071735) do
+ActiveRecord::Schema.define(version: 2023_08_03_041102) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -31,27 +31,6 @@ ActiveRecord::Schema.define(version: 2023_07_28_071735) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
-  end
-
-  create_table "bills", force: :cascade do |t|
-    t.integer "Orderable_id"
-    t.integer "product_id"
-    t.integer "cart_id"
-    t.string "customer_name"
-    t.decimal "product_price"
-    t.integer "quantity"
-    t.decimal "total_product_price"
-    t.text "address"
-    t.decimal "cart_price"
-    t.date "ordered_date"
-    t.date "dilvery_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "product_name"
-    t.integer "user_id"
-    t.index ["Orderable_id"], name: "index_bills_on_Orderable_id"
-    t.index ["cart_id"], name: "index_bills_on_cart_id"
-    t.index ["product_id"], name: "index_bills_on_product_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -75,6 +54,7 @@ ActiveRecord::Schema.define(version: 2023_07_28_071735) do
     t.integer "discount_percentage"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "limit"
   end
 
   create_table "orderables", force: :cascade do |t|
@@ -89,6 +69,7 @@ ActiveRecord::Schema.define(version: 2023_07_28_071735) do
     t.text "address"
     t.decimal "discount"
     t.string "status"
+    t.integer "customer_id"
     t.index ["cart_id"], name: "index_orderables_on_cart_id"
     t.index ["product_id"], name: "index_orderables_on_product_id"
   end
