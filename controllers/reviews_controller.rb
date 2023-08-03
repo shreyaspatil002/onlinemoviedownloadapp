@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     @review = @product.reviews.create(review_params)
     authorize @review
     # p review.errors.full_messages.inspect
-    redirect_to product_path(@product), notice: 'review created !!!'
+    redirect_to product_path(@product), notice: 'Thank you for your valuable review !!!'
   end
 
   def show; end
@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
     @review = @product.reviews.find(params[:id])
     authorize @review
     @review.destroy
-    redirect_to product_path(@product), notice: 'review deleted !!!'
+    redirect_to product_path(@product), notice: 'review is deleted !!!'
   end
 
   private

@@ -3,7 +3,7 @@
 class DiscountsController < ApplicationController
   before_action :authenticate_user! # Use your authentication method
   before_action :set_discount, only: %i[update destroy]
-  after_action :verify_authorized, except: [:index]
+  #  after_action :verify_authorized, except: [:index]
 
   def index
     @discounts = Discount.all
@@ -11,7 +11,7 @@ class DiscountsController < ApplicationController
 
   def new
     @discount = Discount.new
-     authorize @discount
+      authorize @discount
   end
 
   def show
@@ -20,7 +20,7 @@ class DiscountsController < ApplicationController
 
   def edit
     @discount = Discount.find(params[:id])
-    authorize @discount
+     authorize @discount
   rescue ActiveRecord::RecordNotFound
     @discount = Discount.new # Initialize a new Discount instance for new discounts
   end
@@ -53,10 +53,10 @@ class DiscountsController < ApplicationController
 
   def set_discount
     @discount = Discount.find(params[:id])
-    authorize @discount
+     authorize @discount
   end
 
   def discount_params
-    params.require(:discount).permit(:name, :code, :discount_percentage)
+    params.require(:discount).permit(:name, :code, :discount_percentage, :limit)
   end
 end

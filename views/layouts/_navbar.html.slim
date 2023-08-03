@@ -2,7 +2,18 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
   .container-fluid
     a.navbar-brand[href="/products"]
       | Home
-    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"]
+    - if user_signed_in?
+     -if policy(@cart).index?
+      a.navbar-brand[href="/all_cart"]
+        | Order History
+      a.navbar-brand[href="/cart"]
+        | Show Cart
+     -else
+      a.navbar-brand[href="/all_cart"]
+       | Order History
+      a.navbar-brand[href="/cart"]
+        | Show Cart
+    button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"  style="color: white;;"]
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
@@ -22,11 +33,35 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
             | log in
         
        
-      form.d-flex[role="search"]
-         div
-            =  form_tag products_path, method: 'get' do
-            |  Search: 
-            = text_field_tag 'q', params[:q], placeholder: 'search by product name'
-            = submit_tag "Search" 
-            = link_to "Clear", products_path
+      / form.d-flex[role="search"]
+      /    div
+      /       =  form_tag products_path, method: 'get' do
+      /       |  Search: 
+      /       = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+      /       = submit_tag "Search" 
+      /       = link_to "Clear"
+      form.d-flex[role="search"] 
+        div
+          = form_tag products_path,method: 'get', id: 'search-form'  do
+          svg.bi.bi-search[xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewbox="0 0 22 22"]
+            path[d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"]
+          = text_field_tag 'q', params[:q], placeholder: 'search by product name'
+          = submit_tag "Search" 
+          = link_to "Clear", id: "clear-search"
+
+
+javascript:
+  document.addEventListener("DOMContentLoaded", function() {
+    const searchForm = document.getElementById("search-form");
+    const clearSearchLink = document.getElementById("clear-search");
+    const searchInput = searchForm.querySelector("[name='q']");
+
+    clearSearchLink.addEventListener("click", function(event) {
+      event.preventDefault();
+      searchInput.value = ""; // Clear the search input
+      searchForm.submit(); // Submit the form
+      searchInput.value = "";
+    });
+  });
+
           
