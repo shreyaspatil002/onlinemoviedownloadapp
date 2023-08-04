@@ -21,7 +21,11 @@ h2
         p.card-text
             strong 
             |  &emsp;Rating : 
+            span.star-rating data-rating=review.rating
             = review.rating
+
+         
+
         p
     br
 
@@ -29,3 +33,24 @@ h2
         = link_to "Delete", product_review_path(@product.id, review.id), method: :delete, data: {confirm: 'Are you sure?'},class:"btn btn-danger"
       
 
+javascript: 
+  document.addEventListener('DOMContentLoaded', () => {
+  const starRatingElements = document.querySelectorAll('.star-rating');
+
+  starRatingElements.forEach(element => {
+    const elementRating = parseFloat(element.getAttribute('data-rating'));
+    element.innerHTML = '';
+
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('span');
+      if (i <= elementRating) {
+        star.textContent = '\u2605'; // Full star
+      } else if (i - 0.5 <= elementRating) {
+        star.textContent = '\u00BD'; // Half star
+      } else {
+        star.textContent = '\u2606'; // Empty star
+      }
+      element.appendChild(star);
+    }
+  });
+ });

@@ -21,6 +21,7 @@ h2
         p.card-text
             strong 
             |  &emsp;Rating : 
+            span.star-rating(data-rating=review.rating)
             = review.rating
         p
     br 
@@ -53,25 +54,34 @@ div
 
 javascript:
 
-  document.addEventListener('DOMContentLoaded', () => {
+ document.addEventListener('DOMContentLoaded', () => {
+  const ratingInput = document.querySelector('.rating-input');
+  const ratingValue = document.createElement('span');
+  ratingValue.classList.add('rating-value');
+  ratingInput.after(ratingValue);
 
-    const ratingInput = document.querySelector(' .rating-input');
-
-    const ratingValue = document.createElement('span');
-
-    ratingValue.classList.add('rating-value');
-
-    ratingInput.after(ratingValue);
-
-
-
-
-    ratingInput.addEventListener('input', (event) => {
-
-      const rating = event.target.value;
-
-      ratingValue.textContent = rating;
-
-    });
-
+  ratingInput.addEventListener('input', (event) => {
+    const rating = event.target.value;
+    ratingValue.textContent = rating;
   });
+
+  const starRatingElements = document.querySelectorAll('.star-rating');
+
+  starRatingElements.forEach(element => {
+    const elementRating = parseFloat(element.getAttribute('data-rating'));
+    element.innerHTML = '';
+
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        if (i <= elementRating  ) {
+          star.textContent = '\u2605'; // Full star
+        } else if (i - 0.5 == elementRating) {
+          star.textContent = '\u00BD'; // Half star
+        } else {
+          star.textContent = '\u2606'; // Empty star
+        }
+        element.appendChild(star);
+        }
+  });
+ });
+

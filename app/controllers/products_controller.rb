@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
     # authorize @product
     if @product.save
       ProductMailer.notify_product_creation(@product.id).deliver_now
-      redirect_to products_path, notice: 'product created !!!'
+      redirect_to products_path, notice: 'New Book Added !!!'
     else
       render 'new'
     end
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      redirect_to products_path, notice: 'product updated !!!'
+      redirect_to products_path, notice: 'Book got Updated!!!'
     else
       render 'edit'
     end
@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
   def destroy
     authorize @product
     @product.destroy
-    redirect_to products_path, notice: 'product deleted !!!'
+    redirect_to products_path, notice: 'You just Removed Book !!!'
   end
 
   def download_pdf

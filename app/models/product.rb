@@ -25,7 +25,7 @@ class Product < ApplicationRecord
   end
   
 
-  scope :matching, ->(q) { where('name = :q OR code = :q', q: q) }
+  scope :matching, ->(q) { where('name LIKE :q OR code = :q', q: q) }
 
   def is_active?
     is_active == true
@@ -44,13 +44,18 @@ class Product < ApplicationRecord
   private
 
   def acceptable_image
-    return false unless cover_image.attached?
-
-    errors.add(:cover_image, 'is too big') unless cover_image.byte_size <= 1.megabyte
-    acceptable_types = ['image/jpeg', 'image/png', 'image/webp']
-    return if acceptable_types.include?(cover_image.content_type)
-
-    errors.add(:cover_image, 'must be a JPGE or PNG')
+    if cover_image.attached?
+      errors.add(:cover_image, 'is too big') unless cover_image.byte_size <= 1.megabyte
+  
+      acceptable_types = ['image/jpeg', 'image/png', 'image/webp']
+      unless acceptable_types.include?(cover_image.content_type)
+        errors.add(:cover_image, 'must be a JPEG or PNG')
+      end
+    else
+      # Attach a default image if no cover image is attached
+      default_image_path = Rails.root.join('app', 'assets', 'images', 'imagenotfound.png')
+      cover_image.attach(io: File.open(default_image_path), filename: 'imagenotfound.png', content_type: 'image/png')
+    end
   end
 
   # def method_after_commit

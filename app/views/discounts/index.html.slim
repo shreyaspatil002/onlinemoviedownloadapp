@@ -23,7 +23,7 @@ table.table.table-bordered.table-striped
         td = discount.limit
         td
           - if policy(discount).update?
-            = link_to 'Edit', edit_discount_path(discount), class: 'btn btn-primary'
+            = link_to 'Edit', edit_discount_path(discount), class: 'btn btn-light'
           - if policy(discount).destroy?
             = link_to 'Delete', discount_path(discount), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-          = link_to 'View Details', discount_path(discount), class: 'btn btn-secondary'
+          = link_to 'View Details', discount_path(discount), class: 'btn btn-light'
