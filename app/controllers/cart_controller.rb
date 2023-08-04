@@ -4,8 +4,8 @@ class CartController < ApplicationController
 
   def index
     @orderables = Orderable.order(created_at: :desc)
-    if [current_user.profile&.first_name].present?
-      @order_histories = Orderable.where("customer_name LIKE ?", "%#{current_user.profile&.first_name}%").order(created_at: :desc)
+    if [current_user.profile&.user_id].present?
+      @order_histories = Orderable.where("customer_id LIKE ?", "%#{current_user.profile&.user_id}%").order(created_at: :desc)
     end
   end
 
@@ -25,7 +25,7 @@ class CartController < ApplicationController
 
     else
       @cart.orderables.create(product: @product,cart_id: @cart.id, quantity: quantity, customer_name: current_user.profile&.first_name,status: 'unpaid',
-                              address: current_user.profile&.address, price: @product.price, final_price: quantity * @product.price, discount: 0.0)
+                              address: current_user.profile&.address, price: @product.price, final_price: quantity * @product.price, discount: 0.0,customer_id: current_user.profile&.user_id)
     end
   end
 

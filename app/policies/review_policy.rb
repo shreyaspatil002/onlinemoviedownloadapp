@@ -3,10 +3,10 @@
 class ReviewPolicy < ApplicationPolicy
 
   def create?
-    @user.present? && @user.admin?
+    @user.present? && @user.user?
   end
 
   def destroy?
     @user.present? && @user.admin?
   end
-
+end
