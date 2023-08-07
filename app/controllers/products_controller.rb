@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   before_action :load_product, only: %w[edit update show destroy download_pdf]
   before_action :authenticate_user!, except: [:index]
   # layout 'new_layout' #appiled for all
-  layout 'new_layout', except: [:index]
+   layout 'new_layout', except: [:index]
 
   def index
     # @product= policy_scope(Product).all

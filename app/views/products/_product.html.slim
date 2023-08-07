@@ -31,7 +31,7 @@
               = f.hidden_field :id, value: product.id
               = f.hidden_field :quantity, value: 1, min: 1
               = f.submit "Add To Cart"
-              =link_to "SHOW CART", cart_path, class: "btn btn-light btn-sm"
+             
 
             / = link_to 'Show', product, class: "btn btn-dark"
 
@@ -41,7 +41,7 @@
 
             - if policy(product).destroy?
 
-              = link_to "REMOVE", product_path(product), data: {  method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger"
+              = link_to "REMOVE", product_path(product), data: {  method: :delete, confirm: "You want to delete?" }, class: "btn btn-danger"
 
        
 

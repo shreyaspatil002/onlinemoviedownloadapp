@@ -35,9 +35,10 @@ class CartController < ApplicationController
  
   def pay
     
-    @cart.orderables.update(discount: @cart.apply_discount)
-    @cart.orderables.update(status: 'paid')
-    @cart.orderables.update(updated_at: @cart.updated_at + 5.days)
+    @cart.orderables.update(discount: @cart.apply_discount,status: 'paid',updated_at: @cart.updated_at + 5.days)
+    @cart.update(status: true)
+    # @cart.orderables.update(status: 'paid')
+    # @cart.orderables.update(updated_at: @cart.updated_at + 5.days)
     
   end
 
