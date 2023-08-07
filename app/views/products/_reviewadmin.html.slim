@@ -1,38 +1,36 @@
 style 
-  |  h2 { max-width: 1250px; margin: auto; }
-  |  div { max-width: 500px; margin: auto; }
+  | div { max-width: 1200px; }
+  | .reviews-container {max-width: 1200px;}
+  | .reviews-container2 {max-width: 600px;}
+
 /= current_user.role =="admin" 
 h2
   | Reviews :
-  -@product.reviews.each do |review|
-    .card.mb-3
-      .card-body
-        p.card-text
-        
-            strong
-            h3 
-              | &nbsp;User name :  
-              = review.user_name
-    
-        p.card-text
-            strong 
-            |  &emsp;Comment : 
-            = review.comments
-        p.card-text
-            strong 
-            |  &emsp;Rating : 
-            span.star-rating data-rating=review.rating
-            = review.rating
+  .reviews-container
+    - @product.reviews.each_slice(3) do |reviews|
+      .row
+        - reviews.each do |review|
+          .col-md-4
+            .card.mb-3
+              .card-body
+                p.card-text
+                  strong
+                  h3 
+                    | &nbsp;Name :  
+                    = review.user_name.capitalize
 
-         
-
-        p
-    br
-
-      div
-        = link_to "Delete", product_review_path(@product.id, review.id), method: :delete, data: {confirm: 'Are you sure?'},class:"btn btn-danger"
-      
-
+                p.card-text
+                  strong 
+                    |  &emsp;Comment : 
+                    = review.comments
+                p.card-text
+                  strong 
+                    |  &emsp;Rating : 
+                    span.star-rating data-rating=review.rating
+                    = review.rating
+                p
+              div
+                = link_to "Delete", product_review_path(@product.id, review.id), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger"
 javascript: 
   document.addEventListener('DOMContentLoaded', () => {
   const starRatingElements = document.querySelectorAll('.star-rating');
