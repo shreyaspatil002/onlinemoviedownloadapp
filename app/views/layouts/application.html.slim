@@ -18,6 +18,10 @@ html
     = render 'layouts/navbar'
     div[style="text-align:center;"]
         
+        / - flash.each do |name, msg|
+        /   = content_tag :div ,msg, class: name
         - flash.each do |name, msg|
-          = content_tag :div ,msg, class: name
+          div class="alert #{name} alert-success" role="alert"
+            = msg
+          
   = yield

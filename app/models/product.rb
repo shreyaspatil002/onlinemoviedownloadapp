@@ -16,21 +16,18 @@ class Product < ApplicationRecord
   validates :name, uniqueness: { case_sensitive: false }
   validate :acceptable_image
 
-  has_many :reviews , dependent: :destroy
-  has_many :orderables , dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :orderables, dependent: :destroy
 
-  
   has_one_attached :cover_image do |img|
     img.variant :thumb, resize_to_limit: [500, 500]
   end
-  
 
-  scope :matching, ->(q) { where('name LIKE :q OR code = :q', q: q) }
+  scope :matching, ->(q) { where('name LIKE :q OR code LIKE :q', q: "%#{q}%") }
 
   def is_active?
     is_active == true
   end
-
 
   # CUSTOM CALLBACKS
   # after_initialize do
@@ -46,11 +43,9 @@ class Product < ApplicationRecord
   def acceptable_image
     if cover_image.attached?
       errors.add(:cover_image, 'is too big') unless cover_image.byte_size <= 1.megabyte
-  
+
       acceptable_types = ['image/jpeg', 'image/png', 'image/webp']
-      unless acceptable_types.include?(cover_image.content_type)
-        errors.add(:cover_image, 'must be a JPEG or PNG')
-      end
+      errors.add(:cover_image, 'must be a JPEG or PNG') unless acceptable_types.include?(cover_image.content_type)
     else
       # Attach a default image if no cover image is attached
       default_image_path = Rails.root.join('app', 'assets', 'images', 'imagenotfound.png')
