@@ -10,9 +10,7 @@ div2[style="display:flex;  max-width: 600px; margin: auto; justify-content:space
         | Name: 
       = product.name 
     br
-      / strong
-      /   | Price
-      / = product.price
+     
       .form-group.mb-3
       = f.label :customer_name
       = f.text_field :customer_name, value: current_user.profile&.first_name, class: 'form-control form-control-sm'
@@ -35,13 +33,7 @@ div2[style="display:flex;  max-width: 600px; margin: auto; justify-content:space
       = orderable.total
       |  rs 
       br
-      / -if orderable.quantity > 2 && @cart.apply_discount > orderable.qty_discount
-      /   | After applying discount 5%
-      /   h3
-      /     u
-      /     = number_with_precision((orderable.qty_discount), precision: 2)
-      /     |  rs 
-    
+     
       
       = form_with(url: cart_remove_path) do |f|
         = f.hidden_field :id, value: orderable.id

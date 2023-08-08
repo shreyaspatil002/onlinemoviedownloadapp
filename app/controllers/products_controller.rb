@@ -3,11 +3,10 @@
 class ProductsController < ApplicationController
   before_action :load_product, only: %w[edit update show destroy download_pdf]
   before_action :authenticate_user!, except: [:index]
-  # layout 'new_layout' #appiled for all
-   layout 'new_layout', except: [:index]
+  layout 'new_layout', except: [:index]
 
   def index
-    # @product= policy_scope(Product).all
+    
     @products = if params[:q] && !params[:q].blank?
                   Product.matching(params[:q]).page(params[:page])
                 else
@@ -21,7 +20,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    # authorize @product
+     authorize @product
     if @product.save
       ProductMailer.notify_product_creation(@product.id).deliver_now
       redirect_to products_path, notice: 'New Book Added !!!'
