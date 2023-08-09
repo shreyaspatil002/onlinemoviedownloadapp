@@ -13,6 +13,7 @@ class User < ApplicationRecord
   def admin?
     role == 'admin'
   end
+
   def manager?
     role == 'manager'
   end

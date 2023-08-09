@@ -2,7 +2,7 @@
 
 class Cart < ApplicationRecord
   include DiscountPriceModule
-  
+
   has_many :orderables
   has_many :products, through: :orderables
   def total
@@ -10,12 +10,12 @@ class Cart < ApplicationRecord
   end
   # def qty
   #   orderables.to_i.(&:quantity)
-  # end 
+  # end
   # def applied_discount
   #   if @cart.apply_discount < @cart.qty_discount
   #     return @cart.qty_discount
-  #   else 
+  #   else
   #     return @cart.apply_discount
   #   end
-  # end 
+  # end
 end
