@@ -13,11 +13,15 @@ html
     script[src="https://code.jquery.com/jquery-3.6.0.min.js"]
     script[src="path/to/jquery.raty.js"]
     = stylesheet_link_tag 'custom', media: 'all'
+    
   body
     = render 'layouts/navbar'
-    
     div[style="text-align:center;"]
         
+        / - flash.each do |name, msg|
+        /   = content_tag :div ,msg, class: name
         - flash.each do |name, msg|
-          = content_tag :div ,msg, class: name
-    = yield
+          div class="alert #{name} alert-success" role="alert"
+            = msg
+          
+  = yield

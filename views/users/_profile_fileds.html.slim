@@ -10,6 +10,10 @@ h3
     = p.text_field :last_name, class: 'form-control form-control-lg'
     br
   div
+  = p.label :date_of_birth, style: "display: block"
+  = p.date_field :date_of_birth, class: 'form-control form-control-lg'
+
+  div
     = p.label :mobile_number ,style: "display: block"
     = p.number_field :mobile, class: 'form-control form-control-lg'
     br
@@ -19,5 +23,5 @@ h3
     br
   div
     = p.label :zip_code ,style: "display: block"
-    = p.number_field :zip_code, class: 'form-control form-control-lg'
+    = p.text_field :zip_code, class: 'form-control form-control-lg'
     br

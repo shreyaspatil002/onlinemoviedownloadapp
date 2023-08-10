@@ -17,12 +17,12 @@ module Users
     def sign_up_params
       devise_parameter_sanitizer.sanitize(:sign_up)
       params.require(:user).permit(:email, :password, :password_confirmation, :role,
-                                   profile_attributes: %i[id first_name last_name mobile address zip_code])
+                                   profile_attributes: %i[id first_name last_name mobile address zip_code date_of_birth ])
     end
 
     def account_update_params
       params.require(:user).permit(:email, :password, :password_confirmation, :role,
-                                   profile_attributes: %i[id first_name last_name mobile address zip_code])
+                                   profile_attributes: %i[id first_name last_name mobile address zip_code date_of_birth ])
     end
   end
 end
