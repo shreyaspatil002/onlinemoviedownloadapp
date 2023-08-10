@@ -50,7 +50,7 @@ class InvoiceGenerator
           pdf.move_down 5
         end
       end
-      pdf.text "Total price: #{@orderables.final_price}", size: 12
+      pdf.text "Total price: #{@orderables.price}", size: 12
       pdf.text "Discounted price: #{@orderables.discount}", size: 12
       pdf.text "Payment status: #{@orderables.status}", size: 12
       pdf.move_down 50

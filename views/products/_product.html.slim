@@ -12,7 +12,6 @@
 
             = link_to product_path(product) do
 
-                  / = image_tag product.cover_image.variant(resize: "150x150"), class: "img-thumbnail mx-auto d-block"
             - if product.cover_image.attached?
                     = link_to product_path(product) do
                       = image_tag product.cover_image, width: '100',class: "img-thumbnail mx-auto d-block"
@@ -20,18 +19,18 @@
                           .overlay-content
           h5.card-title.card-text.text-truncate.text-center.mt-2.mb-1  = product.name
 
-          p.card-text.text-truncate.text-center.mt-2.mb-1 Size: #{product.code}
+          p.card-text.text-truncate.text-center.mt-2.mb-1 Code: #{product.code}
 
-          p.card-text.text-muted.text-center.mb-3 Price: #{product.price}
+          p.card-text.text-muted.text-center.mb-3 Price: #{product.price} rs
 
           .d-grid.gap-2
 
           
             = form_with(url: cart_add_path) do |f|
               = f.hidden_field :id, value: product.id
-              = f.hidden_field :quantity, value: 1, min: 1
+              = f.number_field :quantity, value: 1, min: 1, class: 'quantity-input'
               = f.submit "Add To Cart"
-              =link_to "SHOW CART", cart_path, class: "btn btn-light btn-sm"
+             
 
             / = link_to 'Show', product, class: "btn btn-dark"
 
@@ -41,14 +40,32 @@
 
             - if policy(product).destroy?
 
-              = link_to "REMOVE", product_path(product), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger"
+              = link_to "REMOVE", product_path(product), data: {  method: :delete, confirm: "You want to delete?" }, class: "btn btn-danger"
 
        
 
 p
 
 
+javascript: 
+  function validateAgeRestriction() {
+    var userBirthYear = <%= current_user.profile&.date_of_birth&.year || 0 %>;
+    var minAgeRequired = <%= min_age_required %>;
+    var currentYear = new Date().getFullYear();
+    var userAge = currentYear - userBirthYear;
 
+    if (userAge < minAgeRequired) {
+      var productName = '<%= orderable.product.name %>';
+      var errorMessage = "You must be at least " + minAgeRequired + " years old to purchase " + productName + ".";
+      
+      // Show custom pop-up message
+      alert("not allowed");
+      
+      return false; // Prevent form submission
+    }
+
+    return true; // Allow form submission
+  }
  
 
  

@@ -1,36 +1,62 @@
+
 style
-  |  h1 { max-width: 500px; margin: auto; } div { max-width: 500px; margin: auto; } 
+  | h1 { max-width: 600px; margin: auto; }
+  | div { max-width: 1000px; margin: auto; }
+  | .product-container { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  | .product-image { flex: 0 0 40%; }
+  | .product-description { flex: 0 0 55%; padding-left: 20px; }
+
 h1
-  = @product.name
+  .product-container
+    = @product.name
+
 div
-  br
-  |  code: 
-  = @product.code
-  br
-  br
+  .product-container
+    .product-image
+      = image_tag @product.cover_image, width: '300' if @product.cover_image.attached?
+
+    .product-description
+      br
+      | code:
+      = @product.code
+      br
+      br
+      | description:
+      = @product.description
+      br
+      br
+      = form_with(url: cart_add_path) do |f|
+        .add-to-cart
+          = f.hidden_field :id, value: @product.id
+          = f.number_field :quantity, value: 0, min: 1, class: 'quantity-input'
+          = f.submit "Add To Cart", class: "btn btn-primary"
+          = link_to "SHOW CART", cart_path, class: "btn btn-outline-primary", onclick: "return validateAgeRestriction();"
+
+  - if policy(@product).destroy?
+      = render 'reviewadmin', review: @review
+  - else
   
-  = image_tag @product.cover_image, width: '400' if @product.cover_image.attached?
-  br
-  br
-  |  description: 
-  = @product.description
-  br
-  br
-    = form_with(url: cart_add_path) do |f|
-      = f.hidden_field :id, value: @product.id
-      = f.number_field :quantity, value: 0, min: 1
-      = f.submit "Add To Cart"
-      =link_to "SHOW CART", cart_path, class: "btn btn-outline-primary btn-lg"
-      
-      
-br
-- if policy(@product).destroy?
-  = render 'reviewadmin', review: @review
- 
-- else   
-  = render 'review', review: @review
+      = render 'reviewUser', review: @review
 = link_to "Back" , root_path, class: "btn btn-light"
+.product-container
 
+javascript: 
+  function validateAgeRestriction() {
+    var userBirthYear = <%= current_user.profile&.date_of_birth&.year || 0 %>;
+    var minAgeRequired = <%= min_age_required %>;
+    var currentYear = new Date().getFullYear();
+    var userAge = currentYear - userBirthYear;
 
+    if (userAge < minAgeRequired) {
+      var productName = '<%= orderable.product.name %>';
+      var errorMessage = "You must be at least " + minAgeRequired + " years old to purchase " + productName + ".";
+      
+      // Show custom pop-up message
+      alert("not allowed");
+      
+      return false; // Prevent form submission
+    }
 
-  
+    return true; // Allow form submission
+  }
+ 
