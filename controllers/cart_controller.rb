@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class CartController < ApplicationController
+ 
   def index
     @orderables = Orderable.order(created_at: :desc)
     return unless [current_user.id].present?
@@ -24,6 +25,11 @@ class CartController < ApplicationController
       current_orderable.destroy
 
     else
+      #@cart.validate_age_restriction_for_products
+     
+    
+        @product.min_age_required.present?
+      
       @cart.orderables.create(product: @product, cart_id: @cart.id, quantity: quantity, customer_name: current_user.profile&.first_name, status: 'unpaid',
                               address: current_user.profile&.address, price: @product.price, final_price: quantity * @product.price, discount: 0.0, customer_id: current_user.profile&.user_id)
     end
@@ -51,4 +57,6 @@ class CartController < ApplicationController
   end
   def preview
   end
+ 
+ 
 end

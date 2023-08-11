@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :code, :price, :is_active, :description, :cover_image, :min_age_required)
+    params.require(:product).permit(:name, :code, :price, :is_active, :description, :cover_image, :min_age_required, :age_restricted)
   end
 
   def load_product
