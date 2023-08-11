@@ -30,7 +30,7 @@ div
           = f.hidden_field :id, value: @product.id
           = f.number_field :quantity, value: 0, min: 1, class: 'quantity-input'
           = f.submit "Add To Cart", class: "btn btn-primary"
-          = link_to "SHOW CART", cart_path, class: "btn btn-outline-primary", onclick: "return validateAgeRestriction();"
+          = link_to "SHOW CART", cart_path, class: "btn btn-outline-primary"
 
   - if policy(@product).destroy?
       = render 'reviewadmin', review: @review
@@ -40,23 +40,3 @@ div
 = link_to "Back" , root_path, class: "btn btn-light"
 .product-container
 
-javascript: 
-  function validateAgeRestriction() {
-    var userBirthYear = <%= current_user.profile&.date_of_birth&.year || 0 %>;
-    var minAgeRequired = <%= min_age_required %>;
-    var currentYear = new Date().getFullYear();
-    var userAge = currentYear - userBirthYear;
-
-    if (userAge < minAgeRequired) {
-      var productName = '<%= orderable.product.name %>';
-      var errorMessage = "You must be at least " + minAgeRequired + " years old to purchase " + productName + ".";
-      
-      // Show custom pop-up message
-      alert("not allowed");
-      
-      return false; // Prevent form submission
-    }
-
-    return true; // Allow form submission
-  }
- 

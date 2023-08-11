@@ -47,26 +47,6 @@
 p
 
 
-javascript: 
-  function validateAgeRestriction() {
-    var userBirthYear = <%= current_user.profile&.date_of_birth&.year || 0 %>;
-    var minAgeRequired = <%= min_age_required %>;
-    var currentYear = new Date().getFullYear();
-    var userAge = currentYear - userBirthYear;
-
-    if (userAge < minAgeRequired) {
-      var productName = '<%= orderable.product.name %>';
-      var errorMessage = "You must be at least " + minAgeRequired + " years old to purchase " + productName + ".";
-      
-      // Show custom pop-up message
-      alert("not allowed");
-      
-      return false; // Prevent form submission
-    }
-
-    return true; // Allow form submission
-  }
- 
 
  
 
