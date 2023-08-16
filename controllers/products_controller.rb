@@ -6,7 +6,6 @@ class ProductsController < ApplicationController
   layout 'new_layout', except: [:index]
 
   def index
-    
     @products = if params[:q].present?
                   Product.matching(params[:q]).page(params[:page])
                 else
@@ -20,7 +19,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-     authorize @product
+    authorize @product
     if @product.save
       ProductMailer.notify_product_creation(@product.id).deliver_now
       redirect_to products_path, notice: 'New Book Added !!!'
@@ -58,7 +57,8 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :code, :price, :is_active, :description, :cover_image, :min_age_required, :age_restricted)
+    params.require(:product).permit(:name, :code, :price, :is_active, :description, :cover_image, :min_age_required,
+                                    :age_restricted)
   end
 
   def load_product
