@@ -28,6 +28,7 @@ class Product < ApplicationRecord
   def is_active?
     is_active == true
   end
+
   def age_restricted?
     age_restricted # Replace with the name of the attribute that indicates whether the product is age-restricted
   end
@@ -39,7 +40,7 @@ class Product < ApplicationRecord
   # CODE OF CONDITIONAL VALIDATION we can use if, unless, proc
   # after_commit :method_after_commit, on: [:create]
   # after_rollback :method_after_rollback
- 
+
   private
 
   def acceptable_image
@@ -54,7 +55,7 @@ class Product < ApplicationRecord
       cover_image.attach(io: File.open(default_image_path), filename: 'imagenotfound.png', content_type: 'image/png')
     end
   end
- 
+
   # def method_after_commit
   #     puts "\n calling after_commit method"
   # end
